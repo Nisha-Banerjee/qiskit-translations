@@ -577,8 +577,8 @@ div.rendered_html tbody tr:hover {
 <h1>雜訊轉換<a class="headerlink" href="#雜訊轉換" title="本標題的永久連結">¶</a></h1>
 <section id="簡介">
 <h2>簡介<a class="headerlink" href="#簡介" title="本標題的永久連結">¶</a></h2>
-<p>This notebook shows how to use the Qiskit Aer utility functions <code class="docutils literal notranslate"><span class="pre">approximate_quantum_error</span></code> and <code class="docutils literal notranslate"><span class="pre">approximate_noise_model</span></code> to transform quantum noise channels into a different, more suitable, noise channel.</p>
-<p>Our guiding example is Clifford simulation. A Clifford simulator can efficiently simulate quantum computations which include gates only from a limited, non-universal set of gates (the Clifford gates). Not all quantum noises can be added to such simulations; hence, we aim to find a “close” noise channel which can be simulated in a Clifford simulator.</p>
+<p>此筆記本會顯示如何使用 Qiskit Aer 的效能函數: <code class="docutils literal notranslate"><span class="pre">approximate_quantum_error</span></code> 和 <code class="docutils literal notranslate"><span class="pre">approximate_noise_model</span></code> 將量子雜訊通道轉換成不同的、更適合的雜訊通道。</p>
+<p>我們的指導範例是 Clifford 模擬器。Clifford 模擬器可以有效地模擬量子計算，其中包括僅限於有限的、非通用的閘集合(Clifford 閘)中的量子計算。 並非所有的量子雜訊都可以加入這樣的模擬中；因此，我們的目標是找到一個可以在 Clifford 模擬器中模擬的「封閉」雜訊通道。</p>
 <p>我們首先從 Aer 提供者公用程式導入轉換功能</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -609,17 +609,17 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="概述">
 <h2>概述<a class="headerlink" href="#概述" title="本標題的永久連結">¶</a></h2>
-<p>A 1-qubit quantum channel is a function <span class="math notranslate nohighlight">\(\mathcal{C}:\mathbb{C}^{2\times2}\to\mathbb{C}^{2\times2}\)</span> mapping density operators to density operators (to ensure the image is a density operator <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> is required to be completely positive and trace preserving, <strong>CPTP</strong>).</p>
-<p>Given quantum channels <span class="math notranslate nohighlight">\(\mathcal{E}_{1},\dots,\mathcal{E}_{r}\)</span>, and probabilities <span class="math notranslate nohighlight">\(p_1, p_2, \dots, p_r\)</span> such that <span class="math notranslate nohighlight">\(0\le p_i \le 1\)</span> and <span class="math notranslate nohighlight">\(p_1+\dots +p_r = 1\)</span>, a new quantum channel <span class="math notranslate nohighlight">\(\mathcal{C}_\mathcal{E}\)</span> can be constructed such that <span class="math notranslate nohighlight">\(\mathcal{C}_\mathcal{E}(\rho)\)</span> has the effect of choosing the channel <span class="math notranslate nohighlight">\(\mathcal{E}_i\)</span> with probability <span class="math notranslate nohighlight">\(p_i\)</span> and applying it to <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
-<p>The noise transformation function solves the following optimization problem: Given a channel <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> (“goal”) and a list of channels <span class="math notranslate nohighlight">\(\mathcal{E}_{1},\dots,\mathcal{E}_{r}\)</span>, find the probabilities <span class="math notranslate nohighlight">\(p_1, p_2, \dots, p_r\)</span> minimizing <span class="math notranslate nohighlight">\(D(\mathcal{C}, \mathcal{C}_\mathcal{E})\)</span> according to some distance metric <span class="math notranslate nohighlight">\(D\)</span> (the Hilbert-Schmidt metric is currently used).</p>
-<p>To ensure the approximation is honest, in the sense that the approximate error channel serves as an “upper bound” for the actual error channel, we add the additional honesty constraint:</p>
+<p>1-量子位元通道:math:<cite>mathcal{C}:mathbb{C}^{2times2}tomathbb{C}^{2times2}`是對映密度算子的功能(確認影像是密度算子:math:</cite>mathcal{C}` is required to be completely positive and trace preserving, <strong>CPTP</strong>).</p>
+<p>給定量子通道:math:<cite>mathcal{E}_{1},dots,mathcal{E}_{r}</cite>，還有機率:math:<cite>p_1, p_2, dots, p_r</cite>，滿足:math:<cite>0le p_i le 1</cite> 和 <span class="math notranslate nohighlight">\(p_1+\dots +p_r = 1\)</span>，而新的量子通道:math:<cite>mathcal{C}_mathcal{E}`可以基於:math:</cite>mathcal{C}_mathcal{E}(rho)`可以有:math:<cite>p_i`的機率選:math:</cite>mathcal{E}_i`通道，並且運用:math:<a href="#id1"><span class="problematic" id="id2">`</span></a>rho`的情況下建立。</p>
+<p>噪音轉換方程式可以優化下述問題: 給定一個頻道:math:mathcal{C} （目標）還有一個頻道的列表:math:mathcal{E}_{1},dots,mathcal{E}_{r} ，根據某距離函數:math:<a href="#id1"><span class="problematic" id="id2">`</span></a>D`（在這裡我們使用Hilbert-Schmidt函數），找出機率:math:p_1, p_2, dots, p_r 可以最小化:math:D(mathcal{C}, mathcal{C}_mathcal{E})</p>
+<p>為了確保近似值是真的，在意義上，近似誤差通道作為實際誤差通道的 「上界 」 ，我們增加額外的真實限制：</p>
 <div class="math notranslate nohighlight">
 \[\text{F}(I,\mathcal{C})\ge F(I,\mathcal{C}_\mathcal{E})\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\text{F}\)</span> is a fidelity measure and <span class="math notranslate nohighlight">\(I\)</span> is the identity channel.</p>
+<p>:math:<a href="#id1"><span class="problematic" id="id2">`</span></a>text{F}`是忠實地測量而 :math:<a href="#id3"><span class="problematic" id="id4">`</span></a>I`是身分通道</p>
 </section>
-<section id="Example:-Approximating-amplitude-damping-noise-with-reset-noise.">
-<h2>Example: Approximating amplitude damping noise with reset noise.<a class="headerlink" href="#Example:-Approximating-amplitude-damping-noise-with-reset-noise." title="本標題的永久連結">¶</a></h2>
-<p><strong>Amplitude damping</strong> noise is described by a single parameter <span class="math notranslate nohighlight">\(0\le \gamma \le 1\)</span> and given by the Kraus operators:</p>
+<section id="範例：具有重設雜訊的近似振幅阻尼雜訊。">
+<h2>範例：具有重設雜訊的近似振幅阻尼雜訊。<a class="headerlink" href="#範例：具有重設雜訊的近似振幅阻尼雜訊。" title="本標題的永久連結">¶</a></h2>
+<p><strong>限幅阻尼</strong> 噪音由一個單一參數 <span class="math notranslate nohighlight">\(0\le \le \le 1\)</span> 說明，並由 Kraus 運算子提供：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left(\begin{array}{cc}
 1 &amp; 0\\
@@ -643,7 +643,7 @@ div.rendered_html tbody tr:hover {
 0 &amp; 0\\
 0 &amp; \sqrt{q}
 \end{array}\right)\end{split}\]</div>
-<p>This can be thought of as “resetting” the quantum state of the affected qubit to <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> with probability <span class="math notranslate nohighlight">\(p\)</span>, to <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span> with probability <span class="math notranslate nohighlight">\(q\)</span>, and do nothing with probability <span class="math notranslate nohighlight">\(1-(p+q)\)</span>.</p>
+<p>這可以被想成“重置”先前被影響的量子到:math:<cite>left|0rightrangle</cite> ，並有:math:<cite>p</cite>, to <span class="math notranslate nohighlight">\(\left|1\right\rangle的機率，擁有機率:math:\)</span>，這個動作不影響到機率:math:<cite>1-(p+q)</cite></p>
 <p>It is not too difficult to determine analytically the best values of <span class="math notranslate nohighlight">\(p,q\)</span> to approximate a <span class="math notranslate nohighlight">\(\gamma\)</span> amplitude damping channel, see the details <a class="reference external" href="https://arxiv.org/abs/1207.0046">here</a>. The best approximation is:</p>
 <div class="math notranslate nohighlight">
 \[p=\frac{1}{2}\left(1+\gamma-\sqrt{1-\gamma}\right), q=0\]</div>
@@ -722,7 +722,7 @@ QuantumError on 1 qubits. Noise circuits:
   P(1) = 0.1762517806955383, QasmQobjInstructions = [[{&#39;name&#39;: &#39;reset&#39;, &#39;qubits&#39;: [0]}]
 </pre></div></div>
 </div>
-<p>The <strong>error operators</strong> that are used to construct the approximating channel can be either given as a list, a dictionary or a string indicating hard-coded channels.</p>
+<p>用來建構近似通道的 <strong>誤差運算子</strong> ，可定為清單、字典或指出硬編碼通道的字串。</p>
 <p>Any channel can be either a list of Kraus operators, or ‘QuantumError’ objects.</p>
 <p>身分通道不需要直接被傳遞；雖然沒有明確指出，但是預設上身分通道都有被使用。</p>
 <p>舉個例子，為了重設的雜訊，我們通過使用明確的 Kraus 表示法來近似振幅阻尼。</p>
@@ -829,7 +829,7 @@ QuantumError on 1 qubits. Noise circuits:
 <li><a class="reference internal" href="#">雜訊轉換</a><ul>
 <li><a class="reference internal" href="#簡介">簡介</a></li>
 <li><a class="reference internal" href="#概述">概述</a></li>
-<li><a class="reference internal" href="#Example:-Approximating-amplitude-damping-noise-with-reset-noise.">Example: Approximating amplitude damping noise with reset noise.</a></li>
+<li><a class="reference internal" href="#範例：具有重設雜訊的近似振幅阻尼雜訊。">範例：具有重設雜訊的近似振幅阻尼雜訊。</a></li>
 <li><a class="reference internal" href="#不同的輸入類型">不同的輸入類型</a></li>
 </ul>
 </li>
