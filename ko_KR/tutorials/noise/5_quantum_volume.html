@@ -577,8 +577,8 @@ div.rendered_html tbody tr:hover {
 <h1>양자 볼륨<a class="headerlink" href="#양자-볼륨" title="제목 주소">¶</a></h1>
 <section id="소개">
 <h2>소개<a class="headerlink" href="#소개" title="제목 주소">¶</a></h2>
-<p><strong>Quantum Volume (QV)</strong> is a method to verify device performance and a metric to quantify the computational power of a quantum device. The method is based on the paper “Validating quantum computers using randomized model circuits” (<a class="reference external" href="https://arxiv.org/abs/1811.12926">https://arxiv.org/abs/1811.12926</a>).</p>
-<p>This notebook gives an example for how to use the <code class="docutils literal notranslate"><span class="pre">ignis.verification.quantum_volume</span></code> module. This particular example shows how to run up to depth 6 quantum volume circuits and will run them using the noisy Aer simulator.</p>
+<p><strong>Quantum Volume (QV)</strong> 는 디바이스 성능을 검증하는 방법이며, 퀀텀 디바이스의 계산 능력을 정량화하기 위한 메트릭이다. 이 방법은“Validating quantum computers using randomized model circuits” (<a class="reference external" href="https://arxiv.org/abs/1811.12926">https://arxiv.org/abs/1811.12926</a>) 에 기초한다.</p>
+<p>이 노트북은 <code class="docutils literal notranslate"><span class="pre">ignis.verification.quantum_volume</span></code> 모듈의 사용 방법에 대한 예를 제공한다. 이 예에서는 최대 깊이 6의 양자 볼륨 회로를 구동하는 방법을 보여 주며, 소음이 심한 Aer 시뮬레이터를 사용하여 회로를 구동한다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -602,7 +602,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="QV-실행의-매개변수-선택하기">
 <h2>QV 실행의 매개변수 선택하기<a class="headerlink" href="#QV-실행의-매개변수-선택하기" title="제목 주소">¶</a></h2>
-<p>In this example we have 6 qubits Q0,Q1,Q3,Q5,Q7,Q10. We are going to look at subsets up to the full set.</p>
+<p>예에서는 6개의 큐비트 Q0, Q1, Q3, Q5, Q7, Q10이 있다. 우리는 전체 세트까지 하위 세트들을 살펴볼 것이다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -617,7 +617,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="QV-시퀀스-생성">
 <h2>QV 시퀀스 생성<a class="headerlink" href="#QV-시퀀스-생성" title="제목 주소">¶</a></h2>
-<p>We generate the quantum volume sequences. We start with a small example (so it doesn’t take too long to run).</p>
+<p>우리는 양자 볼륨을 생성한다. 작은 예제부터 시작한다. (따라서 실행하는 데 시간이 너무 오래 걸리지 않는다).</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -637,7 +637,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>As an example, we print the circuit corresponding to the first QV sequence. Note that the ideal circuits are run on the first n qubits (where n is the number of qubits in the subset).</p>
+<p>를 들어 첫 번째 QV 시퀀스에 해당하는 회로를 인쇄한다. 이상적인 회로는 첫 번째 n 큐비트(여기서 n은 하위 세트의 큐비트 수) 에서 실행된 다는 점을 유의하자.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -722,7 +722,7 @@ qr_2: |0&gt;──┤ U3(1.3211,3.3206,1.9445) ├───■──┤ U3(0.766
 </section>
 <section id="이상적인-회로-시뮬레이션">
 <h2>이상적인 회로 시뮬레이션<a class="headerlink" href="#이상적인-회로-시뮬레이션" title="제목 주소">¶</a></h2>
-<p>The quantum volume method requires that we know the ideal output for each circuit, so use the statevector simulator in Aer to get the ideal result.</p>
+<p>퀀텀 볼륨 방법은 각각의 회로에 대한 이상적인 출력을 알아야 하기 때문에, Aer 에서 상태기 시뮬레이터를 사용하여 이상적인 결과를 얻을 수 있다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -795,7 +795,7 @@ Simulating trial 48
 Simulating trial 49
 </pre></div></div>
 </div>
-<p>Next, load the ideal results into a quantum volume fitter:</p>
+<p>그런 다음, 이상적인 결과를 양자 볼륨 적합자로 로드한다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -809,7 +809,7 @@ Simulating trial 49
 </section>
 <section id="노이즈-모델-정의하기">
 <h2>노이즈 모델 정의하기<a class="headerlink" href="#노이즈-모델-정의하기" title="제목 주소">¶</a></h2>
-<p>We define a noise model for the simulator. To simulate decay, we add depolarizing error probabilities to the CNOT and U gates.</p>
+<p>우리는 시뮬레이터에 대한 잡음 모델을 정의한다. 감쇠를 시뮬레이션하기 위해, CNOT과 U 게이트에 편광 에러(depolarizing error) 확률을 추가한다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -828,7 +828,7 @@ Simulating trial 49
 </section>
 <section id="Aer-시뮬레이터-실행하기">
 <h2>Aer 시뮬레이터 실행하기<a class="headerlink" href="#Aer-시뮬레이터-실행하기" title="제목 주소">¶</a></h2>
-<p>We can execute the QV sequences either using a Qiskit Aer Simulator (with some noise model) or using an IBMQ provider, and obtain a list of results, <code class="docutils literal notranslate"><span class="pre">result_list</span></code>.</p>
+<p>Qiskit Aer Simulator를 사용하거나 (일부 노이즈 모델을 사용하여) IBMQ 제공자를 사용하여 QV 시퀀스를 실행하고 결과 목록인 <code class="docutils literal notranslate"><span class="pre">result_list</span></code> 를 얻을 수 있다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -901,7 +901,7 @@ Running trial 48
 Running trial 49
 </pre></div></div>
 </div>
-<p>Load the experimental data into the fitter. The data will keep accumulating if this is re-run (unless the fitter is re-instantiated).</p>
+<p>실험 데이터를 적합자(fitter) 에 로드한다. (적합자를 다시 인스턴스화하지 않는 한) 재실행해도 데이터는 계속 누적된다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -939,7 +939,7 @@ Running trial 49
 </section>
 <section id="id2">
 <h2>양자 볼륨<a class="headerlink" href="#id2" title="제목 주소">¶</a></h2>
-<p>List statistics for each depth. For each depth list if the depth was successful or not and with what confidence interval. For a depth to be successful the confidence interval must be &gt; 97.5%.</p>
+<p>각 깊이(depth) 에 대한 통계를 나열한다. 각 깊이는 깊이가 성공했는지 여부와 신뢰 구간(confidence interval) 이 어떠한지를 작성한다. 깊이가 성공하려면 신뢰 구간이 97.5%보다 커야 한다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
