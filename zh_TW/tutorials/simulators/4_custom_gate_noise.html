@@ -670,7 +670,7 @@ q_1: ┤ SDG ├┤ H ├┤1       ├─────────────�
      └─────┘└───┘└────────┘                   └────────┘└───┘
 </pre></div></div>
 </div>
-<p>Note that we have assigned an optional <em>label</em> of <code class="docutils literal notranslate"><span class="pre">&quot;iswap&quot;</span></code> to the unitary when it is inserted. This allows us to identify this unitary in a Qiskit Aer <code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> so that we can add errors to these custom unitary gates in noisy circuit simulations.</p>
+<p>請注意，在插入這個么正矩陣時，我們已為它加上一個可選的標籤 <code class="docutils literal notranslate"><span class="pre">&quot;iswap&quot;</span></code>。這讓我們能在 Qiskit Aer <code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> 中識別這個么正矩陣，這樣一來，我們就可以在具有雜訊的電路模擬中為自訂的么正閘新增誤差。</p>
 <p>我們可以確認，作為該電路的模擬器，此電路使用 <code class="docutils literal notranslate"><span class="pre">Operator</span></code> 類別傳回正確的輸出：</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -715,8 +715,8 @@ Average Gate Fidelity: F = 1.000000
 </pre></div></div>
 </div>
 </section>
-<section id="Creating-a-custom-unitary-in-a-noise-model">
-<h2>Creating a custom unitary in a noise model<a class="headerlink" href="#Creating-a-custom-unitary-in-a-noise-model" title="本標題的永久連結">¶</a></h2>
+<section id="在雜訊模型中模擬一個自訂的么正矩陣">
+<h2>在雜訊模型中模擬一個自訂的么正矩陣<a class="headerlink" href="#在雜訊模型中模擬一個自訂的么正矩陣" title="本標題的永久連結">¶</a></h2>
 <p>Qiskit Aer <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> 支援由基底閘中的 <code class="docutils literal notranslate"><span class="pre">&quot;unitary&quot;</span></code> 直接指定的對任意么正運算子的模擬。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -736,8 +736,8 @@ Average Gate Fidelity: F = 1.000000
 True
 </pre></div></div>
 </div>
-<p>This allows us to add noise models to arbitrary unitaries in our simulation when we identify them using the optional <code class="docutils literal notranslate"><span class="pre">label</span></code> argument of <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.unitary</span></code>.</p>
-<p>We will now do this by creating a <code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> that includes a quantum error channel on our custom iSWAP gate. For our example we will create a 2-qubit error consisting of two single-qubit amplitude damping channels with different damping parameters. For now we will assume all the other circuit instructions are ideal.</p>
+<p>當我們使用 <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.unitary</span></code> 的可選 <code class="docutils literal notranslate"><span class="pre">label</span></code> 引數識別它們時，這允許我們將雜訊模型添加到我們的模擬中的任意么正閘。</p>
+<p>現在我們將建立一個 <code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> ，其中包括在我們自訂 iSWAP 閘上的一個量子誤差通道。 舉例，我們將會建立一個雙量子位元誤差，此誤差由兩個具有不同阻尼參數的單量子位元振幅阻尼通道組成。 目前我們將假設除此之外的所有電路指令都是理想的。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -758,7 +758,7 @@ True
 </pre></div>
 </div>
 </div>
-<p>Note that when we add an error to a custom label such as <code class="docutils literal notranslate"><span class="pre">&quot;iswap&quot;</span></code> the <code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> does not know what gate this label is supposed to apply to, so we must manually add the desired gate string to the noise model <code class="docutils literal notranslate"><span class="pre">basis_gates</span></code>. This ensures that the compiler will unroll to the correct basis gates for the noise model simulation. This can done using the <code class="docutils literal notranslate"><span class="pre">NoiseModel.add_basis_gates</span></code> function:</p>
+<p>請注意，當我們將誤差新增至自訂標籤(例如 <code class="docutils literal notranslate"><span class="pre">&quot;iswap&quot;</span></code>)時，<code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> 不知道此標籤應該套用到的閘，因此我們必須手動將想要的套用的閘的字串新增至該雜訊模型 <code class="docutils literal notranslate"><span class="pre">basis_gates</span></code>。 這可確保該編譯器將回歸到該雜訊模型模擬的正確基底閘。 這可以使用 <code class="docutils literal notranslate"><span class="pre">NoiseModel.add_basis_gates</span></code> 函數來完成：</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -838,8 +838,8 @@ c: 2/════════════════════╩══╩═
 </div>
 </div>
 </section>
-<section id="Noisy-circuit-execution">
-<h3>Noisy circuit execution<a class="headerlink" href="#Noisy-circuit-execution" title="本標題的永久連結">¶</a></h3>
+<section id="執行雜訊電路">
+<h3>執行雜訊電路<a class="headerlink" href="#執行雜訊電路" title="本標題的永久連結">¶</a></h3>
 <p>最後，讓我們現在用我們的自訂噪音模型來模擬它。 由於雙量子位元閘的振幅衰減很小，所以我們預期 01 和 10 的結果機率會有小的額外峰值。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -919,7 +919,7 @@ c: 2/════════════════════╩══╩═
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/09/14。
+      最後更新於 2021/09/15。
 
     </p>
   </div>
@@ -942,10 +942,10 @@ c: 2/════════════════════╩══╩═
 <li><a class="reference internal" href="#簡介">簡介</a></li>
 <li><a class="reference internal" href="#建立矩陣算子">建立矩陣算子</a></li>
 <li><a class="reference internal" href="#在電路中使用算符">在電路中使用算符</a></li>
-<li><a class="reference internal" href="#Creating-a-custom-unitary-in-a-noise-model">Creating a custom unitary in a noise model</a></li>
+<li><a class="reference internal" href="#在雜訊模型中模擬一個自訂的么正矩陣">在雜訊模型中模擬一個自訂的么正矩陣</a></li>
 <li><a class="reference internal" href="#模擬一個自訂的么正雜訊模型">模擬一個自訂的么正雜訊模型</a><ul>
 <li><a class="reference internal" href="#理想輸出">理想輸出</a></li>
-<li><a class="reference internal" href="#Noisy-circuit-execution">Noisy circuit execution</a></li>
+<li><a class="reference internal" href="#執行雜訊電路">執行雜訊電路</a></li>
 </ul>
 </li>
 </ul>
