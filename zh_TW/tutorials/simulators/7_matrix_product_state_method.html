@@ -670,8 +670,7 @@ div.rendered_html tbody tr:hover {
   [array([0.70710678, 0.70710678])])}
 </pre></div></div>
 </div>
-<p>Running circuits using the matrix product state simulation method can be fast, relative to other methods. However, if we generate the state vector during the execution, then the conversion to state vector is, of course, exponential in memory and time, and therefore we don’t benefit from using this method. We can benefit if we only do operations that don’t require printing the full state vector. For example, if we run a circuit and then take measurement. The circuit below has 200 qubits. We
-create an <code class="docutils literal notranslate"><span class="pre">EPR</span> <span class="pre">state</span></code> involving all these qubits. Although this state is highly entangled, it is handled well by the matrix product state method, because there are effectively only two states.</p>
+<p>相對於其他方法，使用matrix product state 的模擬方法執行電路可以非常快速， 然而，如果在執行過程中產生狀態向量，則轉換到狀態向量所花的記憶體和時間當然會呈指數成長，因此這種方法較適用於不會把狀態向量完整印出的操作。 例如執行電路並進行測量。 下面這個電路有 200 個量子位元。 我們建立了一個包含所有量子位元的 」 EPR state 」 ，但因為實際上只有兩個狀態 ，因此就算這個狀態糾纏的強度高，用matrix product state處理它的效率仍高。</p>
 <p>我們可以處理更多的量子位元，但可能需要花幾分鐘來執行。試試用 500 個量子位元執行一個類似的電路！ 或者甚至 1000 個位元（你可以在等待的時候弄杯咖啡來喝)。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:

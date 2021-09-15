@@ -634,13 +634,13 @@ div.rendered_html tbody tr:hover {
 <td><p>an n-qubit mixed unitary error given as a list of unitary matrices and probabilities <span class="math notranslate nohighlight">\([(U_0, p_0),...]\)</span>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">coherent_unitary_error</span></code></p></td>
-<td><p>an n-qubit coherent unitary error given as a single unitary matrix <span class="math notranslate nohighlight">\(U\)</span>.</p></td>
+<td><p>n 量子位元的相干么正誤差，以一個么正矩陣 <span class="math notranslate nohighlight">\(U\)</span> 呈現。</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pauli_error</span></code></p></td>
 <td><p>n 量子位元的泡利誤差通道 (混和么正)，以一個泡利矩陣和機率 <span class="math notranslate nohighlight">\([(P_0, p_0),...]\)</span> 的清單呈現。</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">depolarizing_error</span></code></p></td>
-<td><p>an n-qubit depolarizing error channel parameterized by a depolarization probability <span class="math notranslate nohighlight">\(p\)</span>.</p></td>
+<td><p>被去極化機率 <span class="math notranslate nohighlight">\(p\)</span> 參數化的 n 量子位元去極化誤差通道</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reset_error</span></code></p></td>
 <td><p>被重新設定至 <span class="math notranslate nohighlight">\(|0\rangle\)</span>, <span class="math notranslate nohighlight">\(|1\rangle\)</span> 狀態的去極化機率 <span class="math notranslate nohighlight">\(p_0, p_1\)</span> 參數化的單量子位元重設誤差。</p></td>
@@ -663,7 +663,7 @@ div.rendered_html tbody tr:hover {
 <h3>結合量子誤差<a class="headerlink" href="#結合量子誤差" title="本標題的永久連結">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">QuantumError</span></code> 實例可使用組合、張量積和張量展開（反序張量積）組合產生新的 <code class="docutils literal notranslate"><span class="pre">QuantumErrors</span></code> ，如下所示：</p>
 <ul class="simple">
-<li><p>Composition: <span class="math notranslate nohighlight">\(\cal{E}(\rho)=\cal{E_2}(\cal{E_1}(\rho))\)</span> as <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">=</span> <span class="pre">error1.compose(error2)</span></code></p></li>
+<li><p>張量積： <span class="math notranslate nohighlight">\(\cal{E}（\rho） =（\cal{E_1}\otimes\cal{E_2}）（\rho）\)</span> 如同 <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">error1.tensor（error2）</span></code></p></li>
 <li><p>張量積： <span class="math notranslate nohighlight">\(\cal{E}(\rho) =(\cal{E_1}\otimes\cal{E_2})(\rho)\)</span>，程式碼為 <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">error1.tensor(error2)</span></code></p></li>
 <li><p>展開乘積： <span class="math notranslate nohighlight">\(\cal{E}(\rho) =(\cal{E_2}\otimes\cal{E_1})(\rho)\)</span> ，程式碼為 <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">error1.expand(error2)</span></code></p></li>
 </ul>
@@ -940,7 +940,7 @@ NoiseModel:
 </section>
 <section id="非本端量子位元量子誤差">
 <h3>非本端量子位元量子誤差<a class="headerlink" href="#非本端量子位元量子誤差" title="本標題的永久連結">¶</a></h3>
-<p>This applies an error to a specific set of noise qubits after any occurrence of an instruction acting on a specific of gate qubits.</p>
+<p>在一個指令作用在一個特定的閘量子位元後，這會將誤差套用至一組特定的雜訊量子位元。</p>
 <p>可用 <a href="#id1"><span class="problematic" id="id2">``</span></a>noise_model.add_nonlocal_quantum_error(error, instructions, instr_qubits, error_qubits)``將它加入程式:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -974,7 +974,7 @@ NoiseModel:
 </section>
 <section id="使用雜訊模型執行雜訊模擬">
 <h3>使用雜訊模型執行雜訊模擬<a class="headerlink" href="#使用雜訊模型執行雜訊模擬" title="本標題的永久連結">¶</a></h3>
-<p>The command <code class="docutils literal notranslate"><span class="pre">AerSimulator(noise_model=noise_model)</span></code> returns a simulator configured to the given noise model. In addition to setting the simulator’s noise model, it also overrides the simulator’s basis gates, according to the gates of the noise model.</p>
+<p>指令 <code class="docutils literal notranslate"><span class="pre">AerSimulator（noise_model=noise_model）</span></code> 會傳回配置給給定雜訊模型的模擬器。 除了設定模擬器的雜訊模型之外，根據雜訊模型的閘門，它也會置換模擬器的基礎閘門。</p>
 </section>
 </section>
 <section id="雜訊模型範例">
@@ -1044,10 +1044,10 @@ meas: 4/════════════════════════
 <h2>雜訊範例 1：基本位元翻轉誤差雜訊模型<a class="headerlink" href="#雜訊範例-1：基本位元翻轉誤差雜訊模型" title="本標題的永久連結">¶</a></h2>
 <p>讓我們考慮一個在量子信息理論研究中常見的簡單玩具雜訊模型示例：</p>
 <ul class="simple">
-<li><p>When applying a single qubit gate, flip the state of the qubit with probability <code class="docutils literal notranslate"><span class="pre">p_gate1</span></code>.</p></li>
+<li><p>套用單一量子位元閘時， 其量子位元的狀態被翻轉的機率為 <code class="docutils literal notranslate"><span class="pre">p_gatew1</span></code>。</p></li>
 <li><p>當套用二量子位元閘時，將單一量子位元誤差套用至每一個量子位元。</p></li>
-<li><p>When resetting a qubit reset to 1 instead of 0 with probability <code class="docutils literal notranslate"><span class="pre">p_reset</span></code>.</p></li>
-<li><p>When measuring a qubit, flip the state of the qubit with probability <code class="docutils literal notranslate"><span class="pre">p_meas</span></code>.</p></li>
+<li><p>當重設量子位元為 1 而非 0 時，發生機率為 `` p_reset``。</p></li>
+<li><p>套用單一量子門時，將位元的狀態翻轉為機率為 <a href="#id1"><span class="problematic" id="id2">``</span></a>p_gatew1``的狀態。</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
@@ -1121,7 +1121,7 @@ NoiseModel:
 </section>
 <section id="範例-2：-T1/T2-熱弛緩">
 <h2>範例 2： T1/T2 熱弛緩<a class="headerlink" href="#範例-2：-T1/T2-熱弛緩" title="本標題的永久連結">¶</a></h2>
-<p>Now consider a more realistic error model based on thermal relaxation with the qubit environment: * Each qubit is parameterized by a thermal relaxation time constant <span class="math notranslate nohighlight">\(T_1\)</span> and a dephasing time constant <span class="math notranslate nohighlight">\(T_2\)</span>. * Note that we must have <span class="math notranslate nohighlight">\(T_2 \le 2 T_1\)</span>. * Error rates on instructions are determined by gate times and qubit <span class="math notranslate nohighlight">\(T_1\)</span>, <span class="math notranslate nohighlight">\(T_2\)</span> values.</p>
+<p>現在，請根據與位元環境的熱放鬆來考量更真實的錯誤模型： * 每一個位元都是由熱放鬆時間常數 <span class="math notranslate nohighlight">\(T_1\)</span> 和解除階段時間常數 <span class="math notranslate nohighlight">\(T_2\)</span>。 * 請注意，我們必須具有 <span class="math notranslate nohighlight">\(T_2 \le 2 T_1\)</span>。 * 指示的錯誤率是由閘時間及位元 <span class="math notranslate nohighlight">\(T_1\)</span>， <span class="math notranslate nohighlight">\(T_2\)</span> 值決定。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>

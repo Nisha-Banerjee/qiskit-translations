@@ -609,7 +609,7 @@ div.rendered_html tbody tr:hover {
 <li><p><strong>rb_pattern:</strong> 為一個以 [[i, j], [k],…] 格式的清單，此清單將同時生成 RB 序列，其中 Qi 和 Qj 是二量子位元 RB 序列，Qk 是一量子位元序列等。量子位元的數目是輸入項目的總和。 對於 ‘regular’ RB 而言， 其 qubit_pattern 即為 [[0]],[[0,1]]。</p></li>
 <li><p><strong>length_multiplier:</strong> 如果這是一個陣列，其將對每一個 rb_sequence 乘以一個乘數。</p></li>
 <li><p><strong>seed_offset:</strong> 種子起始位置（例如，如果稍後要新增更多種子）。</p></li>
-<li><p><strong>align_cliffs:</strong> If true adds a barrier across all qubits in rb_pattern after each set of cliffords.</p></li>
+<li><p><strong>align_cliffs:</strong> 如果為真，則在 rb_pattern 中所有量子位元的每組 Cliffords 之後，都會新增一個屏障。</p></li>
 </ul>
 <p>在此範例中，我們有 3 個量子位元 Q0，Q1，Q2。 我們同時執行 2Q RB （在量子位元 Q0、Q2 上）和 1Q RB （在量子位元 Q1 上），其中有兩倍多的 1Q Clifford閘。</p>
 <div class="nbinput nblast docutils container">
@@ -701,7 +701,7 @@ qr_2: |0&gt;┤ H ├┤ S ├┤ X ├┤ H ├┤ S ├───────�
 </section>
 <section id="請看此相對於一個電路的么正矩陣">
 <h2>請看此相對於一個電路的么正矩陣<a class="headerlink" href="#請看此相對於一個電路的么正矩陣" title="本標題的永久連結">¶</a></h2>
-<p>The Unitary representing each RB circuit should be the identity (with a global phase), since we multiply random Clifford elements, including a computed reversal gate. We simulate this using an Aer unitary simulator.</p>
+<p>因為我們乘以隨機的 Clifford 元素及其對應的反轉閘，故每個 RB 電路的么正矩陣應是單位矩陣（帶有全局相位）。我們用一個 Aer 幺正模擬器來模擬這個情況。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -763,7 +763,7 @@ qr_2: |0&gt;┤ H ├┤ S ├┤ X ├┤ H ├┤ S ├───────�
 </section>
 <section id="3）在-Aer-模擬器上執行-RB-序列">
 <h2>3）在 Aer 模擬器上執行 RB 序列<a class="headerlink" href="#3）在-Aer-模擬器上執行-RB-序列" title="本標題的永久連結">¶</a></h2>
-<p>We can execute the RB sequences either using a Qiskit Aer Simulator (with some noise model) or using an IBMQ provider, and obtain a list of results, <code class="docutils literal notranslate"><span class="pre">result_list</span></code>.</p>
+<p>我們可以使用 具有某種雜訊模型的Qiskit Aer Simulator或使用 一個 IBMQ provider 以執行 RB 序列，並取得結果清單 <code class="docutils literal notranslate"><span class="pre">result_list</span></code>。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -975,7 +975,7 @@ Finished Simulating
 <section id="預測的閘保真度">
 <h3>預測的閘保真度<a class="headerlink" href="#預測的閘保真度" title="本標題的永久連結">¶</a></h3>
 <p>可以根據模擬中已知的去極化錯誤來預測 <strong>fidelity</strong>。 首先，我們需要計算 <strong>gates per Clifford</strong> 的數量。</p>
-<p>The function <strong>gates_per_clifford</strong> takes a list of transpiled RB circuits and outputs the number of basis gates in each circuit.</p>
+<p>此函數 <strong>gates_per_clifford</strong> 輸入轉譯 RB 電路的清單並輸出每一個電路中的基底閘之數量。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
@@ -1001,7 +1001,7 @@ Number of u3 gates per Clifford: 0.490109
 Number of cx gates per Clifford: 1.526739
 </pre></div></div>
 </div>
-<p>The function <strong>calculate_2q_epc</strong> gives measured errors in the basis gates that were used to construct the Clifford. It assumes that the error in the underlying gates is depolarizing. It outputs the error per a 2-qubit Clifford.</p>
+<p>此函數 <strong>calculate_2q_epc</strong> 會給出基底閘中用來建構 Clifford 的測量誤差。 它假設基底閘中的誤差是去極化的，並會針對每一個二量子位元的 Clifford 輸出對應的誤差。</p>
 <p>該函數的輸入是： - <strong>gate_per_cliff:</strong> 一個包含 gate per Clifford 的字典。 - <strong>epg_2q:</strong> 誤差模型估計的 EPG。 - <strong>qubit_pair:</strong> 用於計算 EPC 的 2 個量子位元的索引。 - <strong>list_epgs_1q:</strong> `` qubit_pair`` 中列出的量子位元的單個量子位元 EPG 清單。 - <a href="#id1"><span class="problematic" id="id2">**</span></a>two_qubit_name:<a href="#id3"><span class="problematic" id="id4">**</span></a><code class="docutils literal notranslate"><span class="pre">basic</span> <span class="pre">gates</span></code> 中的兩個量子位元閘的名稱（預設為``cx``）。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:

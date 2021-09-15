@@ -690,7 +690,7 @@ This succeeded?: True
 <p>如果您對我們如何處理這麼大的電路有興趣，您可以 <a class="reference external" href="https://arxiv.org/abs/1808.00128">查看這篇論文！</a> 以獲得詳細的解釋。</p>
 <p>然而，在執行電路前，重要的是要了解基礎知識。</p>
 <p>此擴展穩定器方法由兩個部分組成。 第一是一種將量子電路分解為 <em>stabilizer circuits</em> 的方法，這是一種可以被有效率地,，古典地模擬的特殊電路類別。 第二是如何組合這些電路從而進行測量。</p>
-<p>The number of terms you need scales with the number of what we call <em>non-Clifford Gates</em>. At the moment, the method knows how to handle the following methods:</p>
+<p>您需要的數學項的數量與我們所說的*non-Clifford 閘*的數量有關。 目前，該方法知道如何處理以下方法：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circ</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">qubit</span><span class="p">])</span>
 <span class="n">circ</span><span class="o">.</span><span class="n">tdg</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">qubit</span><span class="p">])</span>
 <span class="n">circ</span><span class="o">.</span><span class="n">ccx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="n">control_1</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="n">control_2</span><span class="p">],</span> <span class="n">qr</span><span class="p">[</span><span class="n">target</span><span class="p">])</span>
@@ -793,7 +793,7 @@ This succeeded?: True
 <h2>模擬器選項<a class="headerlink" href="#模擬器選項" title="本標題的永久連結">¶</a></h2>
 <p>您可以調整其他幾個選項來控制擴展穩定器的工作方式。 所有這些選項及其說明都可以在 Qiskit Aer 文檔中找到。 但是，我們想強調兩個有助於優化模擬的重要事項。</p>
 <p>為了進行測量，擴展穩定器方法使用馬爾可夫鏈隨機採樣結果。 在採樣開始之前，這個馬爾可夫鏈需要運行一段時間，稱為“混合時間”。 必須在每次電路執行後重新混合。</p>
-<p>If you expect your circuit output to be concentrated on just a few output states, then you can likely optimize your simulations by reducing the <code class="docutils literal notranslate"><span class="pre">extended_stabilizer_mixing_time</span></code> option.</p>
+<p>如果您希望電路輸出僅集中在幾個輸出狀態，您可以通過減少 <code class="docutils literal notranslate"><span class="pre">extended_stabilizer_mixing_time</span></code> 選項來優化模擬。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
