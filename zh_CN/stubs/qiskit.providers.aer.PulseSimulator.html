@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>PulseSimulator &mdash; Qiskit 0.29.1 文档</title>
+  <title>PulseSimulator &mdash; Qiskit 0.30.0 文档</title>
   
 
   
@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="../_static/panels-variables.ade9f9d55df9d2893fc676ecd59723a1.css" type="text/css" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="qiskit.providers.aer.PulseSimulator.available_methods" href="qiskit.providers.aer.PulseSimulator.available_methods.html" />
+    <link rel="next" title="qiskit.providers.aer.PulseSimulator.clear_options" href="qiskit.providers.aer.PulseSimulator.clear_options.html" />
     <link rel="prev" title="qiskit.providers.aer.AerSimulator.status" href="qiskit.providers.aer.AerSimulator.status.html" /> 
 
   
@@ -378,7 +378,7 @@ argument to <code class="docutils literal notranslate"><span class="pre">assembl
 <a class="reference internal" href="qiskit.providers.aer.pulse.PulseSystemModel.html#qiskit.providers.aer.pulse.PulseSystemModel" title="qiskit.providers.aer.pulse.PulseSystemModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PulseSystemModel</span></code></a> from the model details in the supplied
 backend, which is then used in simulation.</p>
 <p><strong>Supported PulseQobj parameters</strong></p>
-<ul class="simple">
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">qubit_lo_freq</span></code>: Local oscillator frequencies for each <code class="xref py py-class docutils literal notranslate"><span class="pre">DriveChannel</span></code>.
 Defaults to either the value given in the
 <a class="reference internal" href="qiskit.providers.aer.pulse.PulseSystemModel.html#qiskit.providers.aer.pulse.PulseSystemModel" title="qiskit.providers.aer.pulse.PulseSystemModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PulseSystemModel</span></code></a>, or is calculated directly
@@ -388,6 +388,13 @@ from the Hamiltonian.</p></li>
 <code class="docutils literal notranslate"><span class="pre">|1&gt;</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">meas_return</span></code>: Measurement type, <code class="docutils literal notranslate"><span class="pre">'single'</span></code> or <code class="docutils literal notranslate"><span class="pre">'avg'</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'avg'</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">shots</span></code>: Number of shots per experiment. Defaults to <code class="docutils literal notranslate"><span class="pre">1024</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">executor</span></code>: Set a custom executor for asynchronous running of simulation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_job_size</span></code> (int or None): If the number of run schedules
+exceeds this value simulation will be run as a set of of sub-jobs
+on the executor. If <code class="docutils literal notranslate"><span class="pre">None</span></code> simulation of all schedules are submitted
+to the executor as a single job (Default: None).</p>
+<p>jobs (Default: None).</p>
+</li>
 </ul>
 <p><strong>Simulation details</strong></p>
 <p>The simulator uses the <code class="docutils literal notranslate"><span class="pre">zvode</span></code> differential equation solver method through <code class="docutils literal notranslate"><span class="pre">scipy</span></code>.
@@ -411,8 +418,6 @@ not available.</p>
 <li><p><strong>configuration</strong> (<a class="reference internal" href="qiskit.providers.models.BackendConfiguration.html#qiskit.providers.models.BackendConfiguration" title="qiskit.providers.models.BackendConfiguration"><em>BackendConfiguration</em></a>) – backend configuration.</p></li>
 <li><p><strong>properties</strong> (<a class="reference internal" href="qiskit.providers.models.BackendProperties.html#qiskit.providers.models.BackendProperties" title="qiskit.providers.models.BackendProperties"><em>BackendProperties</em></a><em> or </em><em>None</em>) – Optional, backend properties.</p></li>
 <li><p><strong>defaults</strong> (<a class="reference internal" href="qiskit.providers.models.PulseDefaults.html#qiskit.providers.models.PulseDefaults" title="qiskit.providers.models.PulseDefaults"><em>PulseDefaults</em></a><em> or </em><em>None</em>) – Optional, backend pulse defaults.</p></li>
-<li><p><strong>available_methods</strong> (<em>list</em><em> or </em><em>None</em>) – Optional, the available simulation methods
-if backend supports multiple methods.</p></li>
 <li><p><strong>provider</strong> (<a class="reference internal" href="qiskit.providers.Provider.html#qiskit.providers.Provider" title="qiskit.providers.Provider"><em>Provider</em></a>) – Optional, provider responsible for this backend.</p></li>
 <li><p><strong>backend_options</strong> (<em>dict</em><em> or </em><em>None</em>) – Optional set custom backend options.</p></li>
 </ul>
@@ -428,40 +433,37 @@ if backend supports multiple methods.</p></li>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.available_methods.html#qiskit.providers.aer.PulseSimulator.available_methods" title="qiskit.providers.aer.PulseSimulator.available_methods"><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_methods</span></code></a></p></td>
-<td><p>Return the available simulation methods.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.clear_options.html#qiskit.providers.aer.PulseSimulator.clear_options" title="qiskit.providers.aer.PulseSimulator.clear_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_options</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.clear_options.html#qiskit.providers.aer.PulseSimulator.clear_options" title="qiskit.providers.aer.PulseSimulator.clear_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_options</span></code></a></p></td>
 <td><p>Reset the simulator options to default values.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.configuration.html#qiskit.providers.aer.PulseSimulator.configuration" title="qiskit.providers.aer.PulseSimulator.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.configuration.html#qiskit.providers.aer.PulseSimulator.configuration" title="qiskit.providers.aer.PulseSimulator.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></p></td>
 <td><p>Return the simulator backend configuration.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.defaults.html#qiskit.providers.aer.PulseSimulator.defaults" title="qiskit.providers.aer.PulseSimulator.defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">defaults</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.defaults.html#qiskit.providers.aer.PulseSimulator.defaults" title="qiskit.providers.aer.PulseSimulator.defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">defaults</span></code></a></p></td>
 <td><p>Return the simulator backend pulse defaults.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.from_backend.html#qiskit.providers.aer.PulseSimulator.from_backend" title="qiskit.providers.aer.PulseSimulator.from_backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_backend</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.from_backend.html#qiskit.providers.aer.PulseSimulator.from_backend" title="qiskit.providers.aer.PulseSimulator.from_backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_backend</span></code></a></p></td>
 <td><p>Initialize simulator from backend.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.name.html#qiskit.providers.aer.PulseSimulator.name" title="qiskit.providers.aer.PulseSimulator.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.name.html#qiskit.providers.aer.PulseSimulator.name" title="qiskit.providers.aer.PulseSimulator.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
 <td><p>Return the backend name.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.properties.html#qiskit.providers.aer.PulseSimulator.properties" title="qiskit.providers.aer.PulseSimulator.properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.properties.html#qiskit.providers.aer.PulseSimulator.properties" title="qiskit.providers.aer.PulseSimulator.properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code></a></p></td>
 <td><p>Return the simulator backend properties if set.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.provider.html#qiskit.providers.aer.PulseSimulator.provider" title="qiskit.providers.aer.PulseSimulator.provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">provider</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.provider.html#qiskit.providers.aer.PulseSimulator.provider" title="qiskit.providers.aer.PulseSimulator.provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">provider</span></code></a></p></td>
 <td><p>Return the backend Provider.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.run.html#qiskit.providers.aer.PulseSimulator.run" title="qiskit.providers.aer.PulseSimulator.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.run.html#qiskit.providers.aer.PulseSimulator.run" title="qiskit.providers.aer.PulseSimulator.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
 <td><p>Run a qobj on the backend.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.set_option.html#qiskit.providers.aer.PulseSimulator.set_option" title="qiskit.providers.aer.PulseSimulator.set_option"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_option</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.set_option.html#qiskit.providers.aer.PulseSimulator.set_option" title="qiskit.providers.aer.PulseSimulator.set_option"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_option</span></code></a></p></td>
 <td><p>Set pulse simulation options and update backend.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.set_options.html#qiskit.providers.aer.PulseSimulator.set_options" title="qiskit.providers.aer.PulseSimulator.set_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_options</span></code></a></p></td>
-<td><p>Set the options fields for the backend</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.set_options.html#qiskit.providers.aer.PulseSimulator.set_options" title="qiskit.providers.aer.PulseSimulator.set_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_options</span></code></a></p></td>
+<td><p>Set the simulator options</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.status.html#qiskit.providers.aer.PulseSimulator.status" title="qiskit.providers.aer.PulseSimulator.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.PulseSimulator.status.html#qiskit.providers.aer.PulseSimulator.status" title="qiskit.providers.aer.PulseSimulator.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status</span></code></a></p></td>
 <td><p>Return backend status.</p></td>
 </tr>
 </tbody>
@@ -493,7 +495,7 @@ method.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="qiskit.providers.aer.PulseSimulator.available_methods.html" class="btn btn-neutral float-right" title="qiskit.providers.aer.PulseSimulator.available_methods" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="qiskit.providers.aer.PulseSimulator.clear_options.html" class="btn btn-neutral float-right" title="qiskit.providers.aer.PulseSimulator.clear_options" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="qiskit.providers.aer.AerSimulator.status.html" class="btn btn-neutral" title="qiskit.providers.aer.AerSimulator.status" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>

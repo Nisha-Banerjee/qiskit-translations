@@ -13,6 +13,7 @@
       :nosignatures:
       :toctree: ../stubs/
 
+      ~StatevectorSimulator.available_devices
       ~StatevectorSimulator.available_methods
       ~StatevectorSimulator.clear_options
       ~StatevectorSimulator.configuration

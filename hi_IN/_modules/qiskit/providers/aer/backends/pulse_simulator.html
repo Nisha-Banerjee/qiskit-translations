@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.providers.aer.backends.pulse_simulator &mdash; Qiskit 0.29.1 दिग्दर्शिका</title>
+  <title>qiskit.providers.aer.backends.pulse_simulator &mdash; Qiskit 0.30.0 दिग्दर्शिका</title>
   
 
   
@@ -340,6 +340,8 @@
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span>
 
+<span class="kn">from</span> <span class="nn">qiskit.circuit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qiskit.compiler</span> <span class="kn">import</span> <span class="n">schedule</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers.options</span> <span class="kn">import</span> <span class="n">Options</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers.models</span> <span class="kn">import</span> <span class="n">BackendConfiguration</span><span class="p">,</span> <span class="n">PulseDefaults</span>
 <span class="kn">from</span> <span class="nn">qiskit.utils</span> <span class="kn">import</span> <span class="n">deprecate_arguments</span>
@@ -367,7 +369,8 @@
     <span class="s1">&#39;max_shots&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e6</span><span class="p">),</span>
     <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A Pulse-based Hamiltonian simulator for Pulse Qobj files&#39;</span><span class="p">,</span>
     <span class="s1">&#39;gates&#39;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="s1">&#39;basis_gates&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;parametric_pulses&#39;</span><span class="p">:</span> <span class="p">[]</span>
 <span class="p">}</span>
 
 
@@ -437,7 +440,13 @@
 <span class="sd">      ``|1&gt;``. Defaults to ``2``.</span>
 <span class="sd">    * ``meas_return``: Measurement type, ``&#39;single&#39;`` or ``&#39;avg&#39;``. Defaults to ``&#39;avg&#39;``.</span>
 <span class="sd">    * ``shots``: Number of shots per experiment. Defaults to ``1024``.</span>
+<span class="sd">    * ``executor``: Set a custom executor for asynchronous running of simulation</span>
+<span class="sd">    * ``max_job_size`` (int or None): If the number of run schedules</span>
+<span class="sd">      exceeds this value simulation will be run as a set of of sub-jobs</span>
+<span class="sd">      on the executor. If ``None`` simulation of all schedules are submitted</span>
+<span class="sd">      to the executor as a single job (Default: None).</span>
 
+<span class="sd">      jobs (Default: None).</span>
 
 <span class="sd">    **Simulation details**</span>
 
@@ -468,6 +477,7 @@
             <span class="n">configuration</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
             <span class="n">configuration</span><span class="o">.</span><span class="n">meas_levels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meas_levels</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">meas_levels</span><span class="p">)</span>
             <span class="n">configuration</span><span class="o">.</span><span class="n">open_pulse</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">configuration</span><span class="o">.</span><span class="n">parametric_pulses</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">if</span> <span class="n">defaults</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">defaults</span> <span class="o">=</span> <span class="n">PulseDefaults</span><span class="p">(</span><span class="n">qubit_freq_est</span><span class="o">=</span><span class="p">[</span><span class="n">inf</span><span class="p">],</span>
@@ -496,6 +506,7 @@
             <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
             <span class="n">meas_level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">meas_return</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">meas_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">qubit_lo_freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">solver_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">subsystem_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -504,14 +515,15 @@
             <span class="n">qubit_freq_est</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span>
             <span class="n">q_level_meas</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
             <span class="n">noise_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">executor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">memory_slots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">max_job_size</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
     <span class="c1"># pylint: disable=arguments-differ, missing-param-doc</span>
 <div class="viewcode-block" id="PulseSimulator.run"><a class="viewcode-back" href="../../../../../stubs/qiskit.providers.aer.PulseSimulator.run.html#qiskit.providers.aer.PulseSimulator.run">[docs]</a>    <span class="nd">@deprecate_arguments</span><span class="p">({</span><span class="s1">&#39;qobj&#39;</span><span class="p">:</span> <span class="s1">&#39;schedules&#39;</span><span class="p">})</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
             <span class="n">schedules</span><span class="p">,</span>
-            <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-            <span class="n">backend_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># DEPRECATED</span>
             <span class="n">validate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="o">**</span><span class="n">run_options</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run a qobj on the backend.</span>
@@ -519,8 +531,6 @@
 <span class="sd">        Args:</span>
 <span class="sd">            schedules (Schedule or list): The pulse :class:`~qiskit.pulse.Schedule`</span>
 <span class="sd">                (or list of ``Schedule`` objects) to be executed.</span>
-<span class="sd">            backend_options (dict or None): DEPRECATED dictionary of backend options</span>
-<span class="sd">                                            for the execution (default: None).</span>
 <span class="sd">            validate (bool): validate the Qobj before running (default: True).</span>
 <span class="sd">            run_options (kwargs): additional run time backend options.</span>
 
@@ -531,35 +541,18 @@
 <span class="sd">            * kwarg options specified in ``run_options`` will override options</span>
 <span class="sd">              of the same kwarg specified in the simulator options, the</span>
 <span class="sd">              ``backend_options`` and the ``Qobj.config``.</span>
-
-<span class="sd">            * The entries in the ``backend_options`` will be combined with</span>
-<span class="sd">              the ``Qobj.config`` dictionary with the values of entries in</span>
-<span class="sd">              ``backend_options`` taking precedence. This kwarg is deprecated</span>
-<span class="sd">              and direct kwarg&#39;s should be used for options to pass them to</span>
-<span class="sd">              ``run_options``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">qobj</span> <span class="o">=</span> <span class="n">schedules</span>
-        <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">PulseSystemModel</span><span class="p">):</span>
-                <span class="n">warn</span><span class="p">(</span>
-                    <span class="s1">&#39;Passing `system_model` as a positional argument to&#39;</span>
-                    <span class="s1">&#39; `PulseSimulator.run` has been deprecated as of&#39;</span>
-                    <span class="s1">&#39; qiskit-aer 0.7.0 and will be removed no earlier than 3&#39;</span>
-                    <span class="s1">&#39; months from that release date. Pass `system_model` as a kwarg&#39;</span>
-                    <span class="s1">&#39; `system_model=model` instead.&#39;</span><span class="p">,</span>
-                    <span class="ne">DeprecationWarning</span><span class="p">,</span>
-                    <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-                <span class="n">run_options</span><span class="p">[</span><span class="s1">&#39;system_model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">backend_options</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-                    <span class="n">validate</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">bool</span><span class="p">):</span>
-                <span class="n">validate</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">backend_options</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">backend_options</span><span class="o">=</span><span class="n">backend_options</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">validate</span><span class="p">,</span>
-                           <span class="o">**</span><span class="n">run_options</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">schedules</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">new_schedules</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">schedules</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">):</span>
+                    <span class="n">new_schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">schedule</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_schedules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">schedules</span> <span class="o">=</span> <span class="n">new_schedules</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">schedules</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">):</span>
+            <span class="n">schedules</span> <span class="o">=</span> <span class="n">schedule</span><span class="p">(</span><span class="n">schedules</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">schedules</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="n">validate</span><span class="p">,</span> <span class="o">**</span><span class="n">run_options</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_system_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -626,6 +619,9 @@
             <span class="c1"># Set config dt and u_channel_lo to system model values</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_set_system_model</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;qubit_lo_freq&#39;</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">freq</span> <span class="o">*</span> <span class="mf">1e-9</span> <span class="k">for</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
 
         <span class="c1"># Set all other options from AerBackend</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>

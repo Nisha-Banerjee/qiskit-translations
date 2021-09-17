@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.providers.aer.PulseSimulator.run &mdash; Qiskit 0.29.1 दिग्दर्शिका</title>
+  <title>qiskit.providers.aer.PulseSimulator.run &mdash; Qiskit 0.30.0 दिग्दर्शिका</title>
   
 
   
@@ -333,15 +333,13 @@
 <h1>qiskit.providers.aer.PulseSimulator.run<a class="headerlink" href="#qiskit-providers-aer-pulsesimulator-run" title="इस शीर्ष-पंक्ति की स्थायी कड़ी">¶</a></h1>
 <dl class="py method">
 <dt id="qiskit.providers.aer.PulseSimulator.run">
-<code class="sig-prename descclassname">PulseSimulator.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">schedules</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">backend_options</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">validate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">run_options</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/backends/pulse_simulator.html#PulseSimulator.run"><span class="viewcode-link">[स्रोत]</span></a><a class="headerlink" href="#qiskit.providers.aer.PulseSimulator.run" title="इस परिभाषा की स्थायी कड़ी">¶</a></dt>
+<code class="sig-prename descclassname">PulseSimulator.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">schedules</span></em>, <em class="sig-param"><span class="n">validate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">run_options</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit/providers/aer/backends/pulse_simulator.html#PulseSimulator.run"><span class="viewcode-link">[स्रोत]</span></a><a class="headerlink" href="#qiskit.providers.aer.PulseSimulator.run" title="इस परिभाषा की स्थायी कड़ी">¶</a></dt>
 <dd><p>Run a qobj on the backend.</p>
 <dl class="field-list simple">
 <dt class="field-odd">मापदण्ड</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>schedules</strong> (<a class="reference internal" href="qiskit.pulse.Schedule.html#qiskit.pulse.Schedule" title="qiskit.pulse.Schedule"><em>Schedule</em></a><em> or </em><em>list</em>) -- The pulse <a class="reference internal" href="qiskit.pulse.Schedule.html#qiskit.pulse.Schedule" title="qiskit.pulse.Schedule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Schedule</span></code></a>
 (or list of <code class="docutils literal notranslate"><span class="pre">Schedule</span></code> objects) to be executed.</p></li>
-<li><p><strong>backend_options</strong> (<em>dict</em><em> or </em><em>None</em>) -- DEPRECATED dictionary of backend options
-for the execution (default: None).</p></li>
 <li><p><strong>validate</strong> (<em>bool</em>) -- validate the Qobj before running (default: True).</p></li>
 <li><p><strong>run_options</strong> (<em>kwargs</em>) -- additional run time backend options.</p></li>
 </ul>
@@ -350,7 +348,7 @@ for the execution (default: None).</p></li>
 <dd class="field-even"><p>The simulation job.</p>
 </dd>
 <dt class="field-odd">प्रदत्त प्रकार </dt>
-<dd class="field-odd"><p><a class="reference internal" href="qiskit.providers.aer.AerJob.html#qiskit.providers.aer.AerJob" title="qiskit.providers.aer.AerJob">AerJob</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="qiskit.providers.aer.jobs.AerJob.html#qiskit.providers.aer.jobs.AerJob" title="qiskit.providers.aer.jobs.AerJob">AerJob</a></p>
 </dd>
 </dl>
 <dl class="simple">
@@ -358,11 +356,6 @@ for the execution (default: None).</p></li>
 <li><p>kwarg options specified in <code class="docutils literal notranslate"><span class="pre">run_options</span></code> will override options
 of the same kwarg specified in the simulator options, the
 <code class="docutils literal notranslate"><span class="pre">backend_options</span></code> and the <code class="docutils literal notranslate"><span class="pre">Qobj.config</span></code>.</p></li>
-<li><p>The entries in the <code class="docutils literal notranslate"><span class="pre">backend_options</span></code> will be combined with
-the <code class="docutils literal notranslate"><span class="pre">Qobj.config</span></code> dictionary with the values of entries in
-<code class="docutils literal notranslate"><span class="pre">backend_options</span></code> taking precedence. This kwarg is deprecated
-and direct kwarg's should be used for options to pass them to
-<code class="docutils literal notranslate"><span class="pre">run_options</span></code>.</p></li>
 </ul>
 </dd>
 </dl>

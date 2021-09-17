@@ -13,6 +13,7 @@
       :nosignatures:
       :toctree: ../stubs/
 
+      ~UnitarySimulator.available_devices
       ~UnitarySimulator.available_methods
       ~UnitarySimulator.clear_options
       ~UnitarySimulator.configuration

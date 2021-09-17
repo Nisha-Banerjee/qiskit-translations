@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>UnitarySimulator &mdash; Qiskit 0.29.1 दिग्दर्शिका</title>
+  <title>UnitarySimulator &mdash; Qiskit 0.30.0 दिग्दर्शिका</title>
   
 
   
@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="../_static/panels-variables.ade9f9d55df9d2893fc676ecd59723a1.css" type="text/css" />
     <link rel="index" title="अनुक्रमणिका" href="../genindex.html" />
     <link rel="search" title="खोज" href="../search.html" />
-    <link rel="next" title="qiskit.providers.aer.UnitarySimulator.available_methods" href="qiskit.providers.aer.UnitarySimulator.available_methods.html" />
+    <link rel="next" title="qiskit.providers.aer.UnitarySimulator.available_devices" href="qiskit.providers.aer.UnitarySimulator.available_devices.html" />
     <link rel="prev" title="qiskit.providers.aer.StatevectorSimulator.status" href="qiskit.providers.aer.StatevectorSimulator.status.html" /> 
 
   
@@ -349,12 +349,23 @@ They will also override any previously set options.</p>
 <p><strong>Backend Options</strong></p>
 <p>The following configurable backend options are supported</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code> (str): Set the simulation method supported methods are
-<code class="docutils literal notranslate"><span class="pre">&quot;unitary&quot;</span></code> for CPU simulation, and <code class="docutils literal notranslate"><span class="pre">&quot;unitary_gpu&quot;</span></code>
-for GPU simulation (Default: <code class="docutils literal notranslate"><span class="pre">&quot;unitary&quot;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device</span></code> (str): Set the simulation device (Default: <code class="docutils literal notranslate"><span class="pre">&quot;CPU&quot;</span></code>).
+Use <a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.available_devices.html#qiskit.providers.aer.UnitarySimulator.available_devices" title="qiskit.providers.aer.UnitarySimulator.available_devices"><code class="xref py py-meth docutils literal notranslate"><span class="pre">available_devices()</span></code></a> to return a list of devices supported
+on the current system.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code> (str): [DEPRECATED] Set the simulation method supported
+methods are <code class="docutils literal notranslate"><span class="pre">&quot;unitary&quot;</span></code> for CPU simulation, and
+<code class="docutils literal notranslate"><span class="pre">&quot;unitary_gpu&quot;</span></code> for GPU simulation. This option has been
+deprecated, use the <code class="docutils literal notranslate"><span class="pre">device</span></code> option to set &quot;CPU&quot; or &quot;GPU&quot;
+simulation instead.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">precision</span></code> (str): Set the floating point precision for
 certain simulation methods to either <code class="docutils literal notranslate"><span class="pre">&quot;single&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;double&quot;</span></code>
 precision (default: <code class="docutils literal notranslate"><span class="pre">&quot;double&quot;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">executor</span></code> (futures.Executor): Set a custom executor for
+asynchronous running of simulation jobs (Default: None).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_job_size</span></code> (int or None): If the number of run circuits
+exceeds this value simulation will be run as a set of of sub-jobs
+on the executor. If <code class="docutils literal notranslate"><span class="pre">None</span></code> simulation of all circuits are submitted
+to the executor as a single job (Default: None).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;initial_unitary&quot;</span></code> (matrix_like): Sets a custom initial unitary
 matrix for the simulation instead of identity (Default: None).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;validation_threshold&quot;</span></code> (double): Sets the threshold for checking
@@ -404,8 +415,6 @@ not available.</p>
 <li><p><strong>configuration</strong> (<a class="reference internal" href="qiskit.providers.models.BackendConfiguration.html#qiskit.providers.models.BackendConfiguration" title="qiskit.providers.models.BackendConfiguration"><em>BackendConfiguration</em></a>) -- backend configuration.</p></li>
 <li><p><strong>properties</strong> (<a class="reference internal" href="qiskit.providers.models.BackendProperties.html#qiskit.providers.models.BackendProperties" title="qiskit.providers.models.BackendProperties"><em>BackendProperties</em></a><em> or </em><em>None</em>) -- Optional, backend properties.</p></li>
 <li><p><strong>defaults</strong> (<a class="reference internal" href="qiskit.providers.models.PulseDefaults.html#qiskit.providers.models.PulseDefaults" title="qiskit.providers.models.PulseDefaults"><em>PulseDefaults</em></a><em> or </em><em>None</em>) -- Optional, backend pulse defaults.</p></li>
-<li><p><strong>available_methods</strong> (<em>list</em><em> or </em><em>None</em>) -- Optional, the available simulation methods
-if backend supports multiple methods.</p></li>
 <li><p><strong>provider</strong> (<a class="reference internal" href="qiskit.providers.Provider.html#qiskit.providers.Provider" title="qiskit.providers.Provider"><em>Provider</em></a>) -- Optional, provider responsible for this backend.</p></li>
 <li><p><strong>backend_options</strong> (<em>dict</em><em> or </em><em>None</em>) -- Optional set custom backend options.</p></li>
 </ul>
@@ -421,37 +430,40 @@ if backend supports multiple methods.</p></li>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.available_methods.html#qiskit.providers.aer.UnitarySimulator.available_methods" title="qiskit.providers.aer.UnitarySimulator.available_methods"><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_methods</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.available_devices.html#qiskit.providers.aer.UnitarySimulator.available_devices" title="qiskit.providers.aer.UnitarySimulator.available_devices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_devices</span></code></a></p></td>
 <td><p>Return the available simulation methods.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.clear_options.html#qiskit.providers.aer.UnitarySimulator.clear_options" title="qiskit.providers.aer.UnitarySimulator.clear_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_options</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.available_methods.html#qiskit.providers.aer.UnitarySimulator.available_methods" title="qiskit.providers.aer.UnitarySimulator.available_methods"><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_methods</span></code></a></p></td>
+<td><p>Return the available simulation methods.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.clear_options.html#qiskit.providers.aer.UnitarySimulator.clear_options" title="qiskit.providers.aer.UnitarySimulator.clear_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_options</span></code></a></p></td>
 <td><p>Reset the simulator options to default values.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.configuration.html#qiskit.providers.aer.UnitarySimulator.configuration" title="qiskit.providers.aer.UnitarySimulator.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.configuration.html#qiskit.providers.aer.UnitarySimulator.configuration" title="qiskit.providers.aer.UnitarySimulator.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></p></td>
 <td><p>Return the simulator backend configuration.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.defaults.html#qiskit.providers.aer.UnitarySimulator.defaults" title="qiskit.providers.aer.UnitarySimulator.defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">defaults</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.defaults.html#qiskit.providers.aer.UnitarySimulator.defaults" title="qiskit.providers.aer.UnitarySimulator.defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">defaults</span></code></a></p></td>
 <td><p>Return the simulator backend pulse defaults.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.name.html#qiskit.providers.aer.UnitarySimulator.name" title="qiskit.providers.aer.UnitarySimulator.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.name.html#qiskit.providers.aer.UnitarySimulator.name" title="qiskit.providers.aer.UnitarySimulator.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
 <td><p>Return the backend name.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.properties.html#qiskit.providers.aer.UnitarySimulator.properties" title="qiskit.providers.aer.UnitarySimulator.properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.properties.html#qiskit.providers.aer.UnitarySimulator.properties" title="qiskit.providers.aer.UnitarySimulator.properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code></a></p></td>
 <td><p>Return the simulator backend properties if set.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.provider.html#qiskit.providers.aer.UnitarySimulator.provider" title="qiskit.providers.aer.UnitarySimulator.provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">provider</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.provider.html#qiskit.providers.aer.UnitarySimulator.provider" title="qiskit.providers.aer.UnitarySimulator.provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">provider</span></code></a></p></td>
 <td><p>Return the backend Provider.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.run.html#qiskit.providers.aer.UnitarySimulator.run" title="qiskit.providers.aer.UnitarySimulator.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.run.html#qiskit.providers.aer.UnitarySimulator.run" title="qiskit.providers.aer.UnitarySimulator.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
 <td><p>Run a qobj on the backend.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.set_option.html#qiskit.providers.aer.UnitarySimulator.set_option" title="qiskit.providers.aer.UnitarySimulator.set_option"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_option</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.set_option.html#qiskit.providers.aer.UnitarySimulator.set_option" title="qiskit.providers.aer.UnitarySimulator.set_option"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_option</span></code></a></p></td>
 <td><p>Special handling for setting backend options.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.set_options.html#qiskit.providers.aer.UnitarySimulator.set_options" title="qiskit.providers.aer.UnitarySimulator.set_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_options</span></code></a></p></td>
-<td><p>Set the options fields for the backend</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.set_options.html#qiskit.providers.aer.UnitarySimulator.set_options" title="qiskit.providers.aer.UnitarySimulator.set_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_options</span></code></a></p></td>
+<td><p>Set the simulator options</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.status.html#qiskit.providers.aer.UnitarySimulator.status" title="qiskit.providers.aer.UnitarySimulator.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.UnitarySimulator.status.html#qiskit.providers.aer.UnitarySimulator.status" title="qiskit.providers.aer.UnitarySimulator.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status</span></code></a></p></td>
 <td><p>Return backend status.</p></td>
 </tr>
 </tbody>
@@ -483,7 +495,7 @@ method.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="qiskit.providers.aer.UnitarySimulator.available_methods.html" class="btn btn-neutral float-right" title="qiskit.providers.aer.UnitarySimulator.available_methods" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="qiskit.providers.aer.UnitarySimulator.available_devices.html" class="btn btn-neutral float-right" title="qiskit.providers.aer.UnitarySimulator.available_devices" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="qiskit.providers.aer.StatevectorSimulator.status.html" class="btn btn-neutral" title="qiskit.providers.aer.StatevectorSimulator.status" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>

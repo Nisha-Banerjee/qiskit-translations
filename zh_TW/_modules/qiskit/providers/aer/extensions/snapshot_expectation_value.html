@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.providers.aer.extensions.snapshot_expectation_value &mdash; Qiskit 0.29.1 說明文件</title>
+  <title>qiskit.providers.aer.extensions.snapshot_expectation_value &mdash; Qiskit 0.30.0 說明文件</title>
   
 
   
@@ -360,23 +360,18 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            ExtensionError: if snapshot is invalid.</span>
 
-<span class="sd">        .. note::</span>
+<span class="sd">        .. deprecated:: 0.9.0</span>
 
-<span class="sd">            This instruction will be deprecated after the qiskit-aer 0.8 release.</span>
-<span class="sd">            It has been superseded by the</span>
+<span class="sd">            This instruction has been deprecated and will be removed no earlier</span>
+<span class="sd">            than 3 months from the 0.9.0 release date. It has been superseded by the</span>
 <span class="sd">            :class:`qiskit.providers.aer.library.SaveExpectationValue` and</span>
 <span class="sd">            :class:`qiskit.providers.aer.library.SaveExpectationValueVariance`</span>
 <span class="sd">            instructions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The `SnapshotExpectationValue` instruction will be deprecated in the&#39;</span>
-             <span class="s1">&#39; future. It has been superseded by the `SaveExpectationValue` and&#39;</span>
+        <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The `SnapshotExpectationValue` instruction has been deprecated as of&#39;</span>
+             <span class="s1">&#39; qiskit-aer 0.9. It has been superseded by the `SaveExpectationValue` and&#39;</span>
              <span class="s1">&#39; `SaveExpectationValueVariance` instructions.&#39;</span><span class="p">,</span>
-             <span class="ne">PendingDeprecationWarning</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">variance</span><span class="p">:</span>
-            <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The snapshot `variance` kwarg has been deprecated and will&#39;</span>
-                 <span class="s1">&#39; be removed in qiskit-aer 0.8. To compute variance use&#39;</span>
-                 <span class="s1">&#39; `single_shot=True` and compute manually in post-processing&#39;</span><span class="p">,</span>
-                 <span class="ne">DeprecationWarning</span><span class="p">)</span>
+             <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">pauli_op</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_pauli_op</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pauli_op</span><span class="p">:</span>
             <span class="c1"># Pauli expectation value</span>
@@ -474,18 +469,19 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ExtensionError: if snapshot is invalid.</span>
 
-<span class="sd">    .. note::</span>
+<span class="sd">    .. deprecated:: 0.9.0</span>
 
-<span class="sd">        This method will be deprecated after the qiskit-aer 0.8 release.</span>
-<span class="sd">        It has been superseded by the</span>
+<span class="sd">        This instruction has been deprecated and will be removed no earlier</span>
+<span class="sd">        than 3 months from the 0.9.0 release date. It has been superseded by the</span>
 <span class="sd">        :func:`qiskit.providers.aer.library.save_expectation_value` and</span>
 <span class="sd">        :func:`qiskit.providers.aer.library.save_expectation_value_variance`</span>
 <span class="sd">        circuit methods.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The `snapshot_expectation_value` circuit method will be deprecated &#39;</span>
-         <span class="s1">&#39; in the future. It has been superseded by the `save_expectation_value`&#39;</span>
+    <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The `snapshot_expectation_value` circuit method has been deprecated as of&#39;</span>
+         <span class="s1">&#39; qiskit-aer 0.9 and will be removed in a future release.&#39;</span>
+         <span class="s1">&#39; It has been superseded by the `save_expectation_value`&#39;</span>
          <span class="s1">&#39; and `save_expectation_value_variance` circuit methods.&#39;</span><span class="p">,</span>
-         <span class="ne">PendingDeprecationWarning</span><span class="p">)</span>
+         <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">snapshot_register</span> <span class="o">=</span> <span class="n">Snapshot</span><span class="o">.</span><span class="n">define_snapshot_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qubits</span><span class="o">=</span><span class="n">qubits</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>

@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>QasmSimulator &mdash; Tài liệu Qiskit 0.29.1</title>
+  <title>QasmSimulator &mdash; Tài liệu Qiskit 0.30.0</title>
   
 
   
@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="../_static/panels-variables.ade9f9d55df9d2893fc676ecd59723a1.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Tìm Kiếm" href="../search.html" />
-    <link rel="next" title="qiskit.providers.aer.QasmSimulator.available_methods" href="qiskit.providers.aer.QasmSimulator.available_methods.html" />
+    <link rel="next" title="qiskit.providers.aer.QasmSimulator.available_devices" href="qiskit.providers.aer.QasmSimulator.available_devices.html" />
     <link rel="prev" title="qiskit.providers.aer.PulseSimulator.status" href="qiskit.providers.aer.PulseSimulator.status.html" /> 
 
   
@@ -394,10 +394,23 @@ number of qubits, and noise model.</p></li>
 <p><strong>Additional Backend Options</strong></p>
 <p>The following simulator specific backend options are supported</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code> (str): Set the simulation method (Default: <code class="docutils literal notranslate"><span class="pre">&quot;automatic&quot;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code> (str): Set the simulation method (Default: <code class="docutils literal notranslate"><span class="pre">&quot;automatic&quot;</span></code>).
+Use <a class="reference internal" href="qiskit.providers.aer.QasmSimulator.available_methods.html#qiskit.providers.aer.QasmSimulator.available_methods" title="qiskit.providers.aer.QasmSimulator.available_methods"><code class="xref py py-meth docutils literal notranslate"><span class="pre">available_methods()</span></code></a> to return a list of all availabe methods.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device</span></code> (str): Set the simulation device (Default: <code class="docutils literal notranslate"><span class="pre">&quot;CPU&quot;</span></code>).
+Use <a class="reference internal" href="qiskit.providers.aer.QasmSimulator.available_devices.html#qiskit.providers.aer.QasmSimulator.available_devices" title="qiskit.providers.aer.QasmSimulator.available_devices"><code class="xref py py-meth docutils literal notranslate"><span class="pre">available_devices()</span></code></a> to return a list of devices supported
+on the current system.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">precision</span></code> (str): Set the floating point precision for
 certain simulation methods to either <code class="docutils literal notranslate"><span class="pre">&quot;single&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;double&quot;</span></code>
 precision (default: <code class="docutils literal notranslate"><span class="pre">&quot;double&quot;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">executor</span></code> (futures.Executor): Set a custom executor for
+asynchronous running of simulation jobs (Default: None).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_job_size</span></code> (int or None): If the number of run circuits
+exceeds this value simulation will be run as a set of of sub-jobs
+on the executor. If <code class="docutils literal notranslate"><span class="pre">None</span></code> simulation of all circuits are submitted
+to the executor as a single job (Default: None).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_truncation</span></code> (bool): If set to True this removes unnecessary
+qubits which do not affect the simulation outcome from the simulated
+circuits (Default: True).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">zero_threshold</span></code> (double): Sets the threshold for truncating
 small values to zero in the result data (Default: 1e-10).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">validation_threshold</span></code> (double): Sets the threshold for checking
@@ -457,11 +470,11 @@ instruction (Default: 32).</p></li>
 <p>These backend options only apply when using the <code class="docutils literal notranslate"><span class="pre">&quot;extended_stabilizer&quot;</span></code>
 simulation method:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">extended_stabilizer_sampling_methid</span></code> (string): Choose how to simulate
+<li><p><code class="docutils literal notranslate"><span class="pre">extended_stabilizer_sampling_method</span></code> (string): Choose how to simulate
 measurements on qubits. The performance of the simulator depends
 significantly on this choice. In the following, let n be the number of
 qubits in the circuit, m the number of qubits measured, and S be the
-number of shots. (Default: resampled_metropolis)</p>
+number of shots (Default: resampled_metropolis).</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;metropolis&quot;</span></code>: Use a Monte-Carlo method to sample many output
 strings from the simulator at once. To be accurate, this method
@@ -518,15 +531,23 @@ the svd algorithm. Coefficients beyond this limit will be discarded.
 Discard the smallest coefficients for which the sum of
 their squares is smaller than this threshold.
 (Default: 1e-16).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mps_sample_measure_algorithm</span></code> (str):
-Choose which algorithm to use for <code class="docutils literal notranslate"><span class="pre">&quot;sample_measure&quot;</span></code>. <code class="docutils literal notranslate"><span class="pre">&quot;mps_probabilities&quot;</span></code>
-means all state probabilities are computed and measurements are based on them.
-It is more efficient for a large number of shots, small number of qubits and low
-entanglement. <code class="docutils literal notranslate"><span class="pre">&quot;mps_apply_measure&quot;</span></code> creates a copy of the mps structure and
-makes a measurement on it. It is more effients for a small number of shots, high
-number of qubits, and low entanglement. If the user does not specify the algorithm,
-a heuristic algorithm is used to select between the two algorithms.
-(Default: &quot;mps_heuristic&quot;).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mps_sample_measure_algorithm</span></code> (str): Choose which algorithm to use for
+<code class="docutils literal notranslate"><span class="pre">&quot;sample_measure&quot;</span></code> (Default: &quot;mps_apply_measure&quot;).</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;mps_probabilities&quot;</span></code>: This method first constructs the probability
+vector and then generates a sample per shot. It is more efficient for
+a large number of shots and a small number of qubits, with complexity
+O(2^n * n * D^2) to create the vector and O(1) per shot, where n is
+the number of qubits and D is the bond dimension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;mps_apply_measure&quot;</span></code>: This method creates a copy of the mps structure
+and measures directly on it. It is more efficient for a small number of
+shots, and a large number of qubits, with complexity around
+O(n * D^2) per shot.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mps_log_data</span></code> (str): if True, output logging data of the MPS
+structure: bond dimensions and values discarded during approximation.
+(Default: False)</p></li>
 </ul>
 <p>These backend options apply in circuit optimization passes:</p>
 <ul class="simple">
@@ -549,8 +570,6 @@ not available.</p>
 <li><p><strong>configuration</strong> (<a class="reference internal" href="qiskit.providers.models.BackendConfiguration.html#qiskit.providers.models.BackendConfiguration" title="qiskit.providers.models.BackendConfiguration"><em>BackendConfiguration</em></a>) -- backend configuration.</p></li>
 <li><p><strong>properties</strong> (<a class="reference internal" href="qiskit.providers.models.BackendProperties.html#qiskit.providers.models.BackendProperties" title="qiskit.providers.models.BackendProperties"><em>BackendProperties</em></a><em> or </em><em>None</em>) -- Optional, backend properties.</p></li>
 <li><p><strong>defaults</strong> (<a class="reference internal" href="qiskit.providers.models.PulseDefaults.html#qiskit.providers.models.PulseDefaults" title="qiskit.providers.models.PulseDefaults"><em>PulseDefaults</em></a><em> or </em><em>None</em>) -- Optional, backend pulse defaults.</p></li>
-<li><p><strong>available_methods</strong> (<em>list</em><em> or </em><em>None</em>) -- Optional, the available simulation methods
-if backend supports multiple methods.</p></li>
 <li><p><strong>provider</strong> (<a class="reference internal" href="qiskit.providers.Provider.html#qiskit.providers.Provider" title="qiskit.providers.Provider"><em>Provider</em></a>) -- Optional, provider responsible for this backend.</p></li>
 <li><p><strong>backend_options</strong> (<em>dict</em><em> or </em><em>None</em>) -- Optional set custom backend options.</p></li>
 </ul>
@@ -566,40 +585,43 @@ if backend supports multiple methods.</p></li>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.available_methods.html#qiskit.providers.aer.QasmSimulator.available_methods" title="qiskit.providers.aer.QasmSimulator.available_methods"><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_methods</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.available_devices.html#qiskit.providers.aer.QasmSimulator.available_devices" title="qiskit.providers.aer.QasmSimulator.available_devices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_devices</span></code></a></p></td>
 <td><p>Return the available simulation methods.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.clear_options.html#qiskit.providers.aer.QasmSimulator.clear_options" title="qiskit.providers.aer.QasmSimulator.clear_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_options</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.available_methods.html#qiskit.providers.aer.QasmSimulator.available_methods" title="qiskit.providers.aer.QasmSimulator.available_methods"><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_methods</span></code></a></p></td>
+<td><p>Return the available simulation methods.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.clear_options.html#qiskit.providers.aer.QasmSimulator.clear_options" title="qiskit.providers.aer.QasmSimulator.clear_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_options</span></code></a></p></td>
 <td><p>Reset the simulator options to default values.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.configuration.html#qiskit.providers.aer.QasmSimulator.configuration" title="qiskit.providers.aer.QasmSimulator.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.configuration.html#qiskit.providers.aer.QasmSimulator.configuration" title="qiskit.providers.aer.QasmSimulator.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></p></td>
 <td><p>Return the simulator backend configuration.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.defaults.html#qiskit.providers.aer.QasmSimulator.defaults" title="qiskit.providers.aer.QasmSimulator.defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">defaults</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.defaults.html#qiskit.providers.aer.QasmSimulator.defaults" title="qiskit.providers.aer.QasmSimulator.defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">defaults</span></code></a></p></td>
 <td><p>Return the simulator backend pulse defaults.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.from_backend.html#qiskit.providers.aer.QasmSimulator.from_backend" title="qiskit.providers.aer.QasmSimulator.from_backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_backend</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.from_backend.html#qiskit.providers.aer.QasmSimulator.from_backend" title="qiskit.providers.aer.QasmSimulator.from_backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_backend</span></code></a></p></td>
 <td><p>Initialize simulator from backend.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.name.html#qiskit.providers.aer.QasmSimulator.name" title="qiskit.providers.aer.QasmSimulator.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.name.html#qiskit.providers.aer.QasmSimulator.name" title="qiskit.providers.aer.QasmSimulator.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
 <td><p>Return the backend name.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.properties.html#qiskit.providers.aer.QasmSimulator.properties" title="qiskit.providers.aer.QasmSimulator.properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.properties.html#qiskit.providers.aer.QasmSimulator.properties" title="qiskit.providers.aer.QasmSimulator.properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code></a></p></td>
 <td><p>Return the simulator backend properties if set.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.provider.html#qiskit.providers.aer.QasmSimulator.provider" title="qiskit.providers.aer.QasmSimulator.provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">provider</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.provider.html#qiskit.providers.aer.QasmSimulator.provider" title="qiskit.providers.aer.QasmSimulator.provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">provider</span></code></a></p></td>
 <td><p>Return the backend Provider.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.run.html#qiskit.providers.aer.QasmSimulator.run" title="qiskit.providers.aer.QasmSimulator.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.run.html#qiskit.providers.aer.QasmSimulator.run" title="qiskit.providers.aer.QasmSimulator.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
 <td><p>Run a qobj on the backend.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.set_option.html#qiskit.providers.aer.QasmSimulator.set_option" title="qiskit.providers.aer.QasmSimulator.set_option"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_option</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.set_option.html#qiskit.providers.aer.QasmSimulator.set_option" title="qiskit.providers.aer.QasmSimulator.set_option"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_option</span></code></a></p></td>
 <td><p>Special handling for setting backend options.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.set_options.html#qiskit.providers.aer.QasmSimulator.set_options" title="qiskit.providers.aer.QasmSimulator.set_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_options</span></code></a></p></td>
-<td><p>Set the options fields for the backend</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.set_options.html#qiskit.providers.aer.QasmSimulator.set_options" title="qiskit.providers.aer.QasmSimulator.set_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_options</span></code></a></p></td>
+<td><p>Set the simulator options</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.status.html#qiskit.providers.aer.QasmSimulator.status" title="qiskit.providers.aer.QasmSimulator.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.QasmSimulator.status.html#qiskit.providers.aer.QasmSimulator.status" title="qiskit.providers.aer.QasmSimulator.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status</span></code></a></p></td>
 <td><p>Return backend status.</p></td>
 </tr>
 </tbody>
@@ -631,7 +653,7 @@ method.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="qiskit.providers.aer.QasmSimulator.available_methods.html" class="btn btn-neutral float-right" title="qiskit.providers.aer.QasmSimulator.available_methods" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="qiskit.providers.aer.QasmSimulator.available_devices.html" class="btn btn-neutral float-right" title="qiskit.providers.aer.QasmSimulator.available_devices" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="qiskit.providers.aer.PulseSimulator.status.html" class="btn btn-neutral" title="qiskit.providers.aer.PulseSimulator.status" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>

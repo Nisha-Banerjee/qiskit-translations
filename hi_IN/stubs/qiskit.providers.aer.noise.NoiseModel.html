@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>NoiseModel &mdash; Qiskit 0.29.1 दिग्दर्शिका</title>
+  <title>NoiseModel &mdash; Qiskit 0.30.0 दिग्दर्शिका</title>
   
 
   
@@ -369,7 +369,7 @@ instructions.</p>
 
 <span class="c1"># Add errors to noise model</span>
 <span class="n">noise_model</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">NoiseModel</span><span class="p">()</span>
-<span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">error_1</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">])</span>
+<span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">error_1</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;rz&#39;</span><span class="p">,</span> <span class="s1">&#39;sx&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">])</span>
 <span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">error_2</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;cx&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">noise_model</span><span class="p">)</span>
 </pre></div>
@@ -378,7 +378,7 @@ instructions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">मापदण्ड</dt>
 <dd class="field-odd"><p><strong>basis_gates</strong> (<em>list</em><em>[</em><em>str</em><em>] or </em><em>None</em>) -- Specify an initial basis_gates
-for the noise model. If None a default value of ['id', 'u3', 'cx']
+for the noise model. If None a default value of ['id', 'rz', 'sx', 'cx']
 is used (Default: None).</p>
 </dd>
 </dl>
@@ -408,7 +408,7 @@ or the <a class="reference internal" href="qiskit.providers.aer.noise.NoiseModel
 <td><p>Add additional gates to the noise model basis_gates.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="qiskit.providers.aer.noise.NoiseModel.add_nonlocal_quantum_error.html#qiskit.providers.aer.noise.NoiseModel.add_nonlocal_quantum_error" title="qiskit.providers.aer.noise.NoiseModel.add_nonlocal_quantum_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_nonlocal_quantum_error</span></code></a></p></td>
-<td><p>Add a non-local quantum error to the noise model.</p></td>
+<td><p>Add a non-local quantum error to the noise model (DEPRECATED).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="qiskit.providers.aer.noise.NoiseModel.add_quantum_error.html#qiskit.providers.aer.noise.NoiseModel.add_quantum_error" title="qiskit.providers.aer.noise.NoiseModel.add_quantum_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_quantum_error</span></code></a></p></td>
 <td><p>Add a quantum error to the noise model.</p></td>

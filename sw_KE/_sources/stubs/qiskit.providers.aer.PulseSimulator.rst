@@ -13,7 +13,6 @@
       :nosignatures:
       :toctree: ../stubs/
 
-      ~PulseSimulator.available_methods
       ~PulseSimulator.clear_options
       ~PulseSimulator.configuration
       ~PulseSimulator.defaults

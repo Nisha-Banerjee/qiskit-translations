@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.providers.aer.noise.errors.quantum_error &mdash; Qiskit 0.29.1 Dokumentation</title>
+  <title>qiskit.providers.aer.noise.errors.quantum_error &mdash; Qiskit 0.30.0 Dokumentation</title>
   
 
   
@@ -563,10 +563,8 @@
 <div class="viewcode-block" id="QuantumError.ideal"><a class="viewcode-back" href="../../../../../../stubs/qiskit.providers.aer.noise.QuantumError.ideal.html#qiskit.providers.aer.noise.QuantumError.ideal">[Doku]</a>    <span class="k">def</span> <span class="nf">ideal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return True if current error object is an identity&quot;&quot;&quot;</span>
         <span class="n">instructions</span><span class="p">,</span> <span class="n">probability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_term</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">probability</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">instructions</span> <span class="o">==</span> <span class="p">[{</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;qubits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="p">}]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">probability</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">instructions</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span>
+                <span class="n">instructions</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;id&quot;</span><span class="p">):</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Error object is ideal&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span></div>
@@ -594,7 +592,7 @@
 <span class="sd">            position (int): the position of the error term.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            tuple: A pair `(p, circuit)` for error term at `position` &lt; size</span>
+<span class="sd">            tuple: A pair `(circuit, p)` for error term at `position` &lt; size</span>
 <span class="sd">            where `p` is the probability of the error term, and `circuit`</span>
 <span class="sd">            is the list of qobj instructions for the error term.</span>
 

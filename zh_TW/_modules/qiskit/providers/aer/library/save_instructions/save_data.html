@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.providers.aer.library.save_instructions.save_data &mdash; Qiskit 0.29.1 說明文件</title>
+  <title>qiskit.providers.aer.library.save_instructions.save_data &mdash; Qiskit 0.30.0 說明文件</title>
   
 
   
@@ -367,9 +367,6 @@
 <span class="sd">            The supported subtypes are &#39;single&#39;, &#39;list&#39;, &#39;c_list&#39;, &#39;average&#39;,</span>
 <span class="sd">            &#39;c_average&#39;, &#39;accum&#39;, &#39;c_accum&#39;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
-
         <span class="k">if</span> <span class="n">subtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allowed_subtypes</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ExtensionError</span><span class="p">(</span>
                 <span class="s2">&quot;Invalid data subtype for SaveData instruction.&quot;</span><span class="p">)</span>
@@ -378,9 +375,13 @@
             <span class="k">raise</span> <span class="n">ExtensionError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Invalid label for save data instruction, </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> must be a string.&quot;</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_label</span> <span class="o">=</span> <span class="n">label</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_subtype</span> <span class="o">=</span> <span class="n">subtype</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the QasmQobjInstruction for the intructions.&quot;&quot;&quot;</span>

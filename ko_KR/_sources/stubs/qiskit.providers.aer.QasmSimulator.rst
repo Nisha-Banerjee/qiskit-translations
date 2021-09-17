@@ -13,6 +13,7 @@
       :nosignatures:
       :toctree: ../stubs/
 
+      ~QasmSimulator.available_devices
       ~QasmSimulator.available_methods
       ~QasmSimulator.clear_options
       ~QasmSimulator.configuration
