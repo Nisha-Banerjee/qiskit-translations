@@ -223,7 +223,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">নথির কেন্দ্রস্থল</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">বিবরণীর (ডকুমেন্টেশন) কেন্দ্রস্থল</a></li>
 </ul>
 <p><span class="caption-text">ফ্রন্টম্যাটার</span></p>
 <ul class="current">
@@ -325,11 +325,12 @@
               
   <section id="introduction-to-qiskit">
 <h1>Qiskit পরিচিতি<a class="headerlink" href="#introduction-to-qiskit" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
-<p>Qiskit ব্যবহারের কর্মপ্রবাহ​ নিম্নলিখিত চারটি উচ্চ-স্তরের পদক্ষেপ নিয়ে গঠিত:</p>
+<p>Qiskit ব্যবহারের কর্মপ্রবাহ​ নিম্নলিখিত চারটি উচ্চ-স্তরের ধাপে গঠিতঃ</p>
 <ul class="simple">
 <li><p><strong>Build</strong>: একটি কোয়ান্টাম বর্তনী (সার্কিট) এর পরিকল্পনা যা আপনার বিবেচ্য কোনো সমস্যার প্রতিনিধিত্ব করে।</p></li>
-<li><p><strong>Compile (সংকলন)</strong>: নির্দিষ্ট কোয়ান্টাম পরিষেবার জন্য বর্তনীগুলি (সার্কিট) সঙ্কলন করুন, উদাঃ একটি কোয়ান্টাম ব্যবস্থা বা প্রথাগত (ক্লাসিক্যাল) সিমুলেটর।</p></li>
-<li><p><strong>Run (চালান)</strong>: নির্দিষ্ট কোয়ান্টাম পরিষেবাগুলিতে সংকলিত বর্তনীগুলি (সার্কিট) চালান। এই পরিষেবাগুলি ক্লাউড-ভিত্তিক বা স্থানীয় হতে পারে।</p></li>
+<li><p><strong>Compile (সংকলন)</strong>: নির্দিষ্ট কোয়ান্টাম পরিষেবার জন্য বর্তনী (সার্কিট) সংকলন, যেমন একটি কোয়ান্টাম ব্যবস্থা বা
+ধ্রুপদী (ক্লাসিক্যাল) সিমুলেটর।</p></li>
+<li><p><strong>Run (চালানো)</strong>: নির্দিষ্ট কোয়ান্টাম পরিষেবায় সংকলিত বর্তনীগুলি (সার্কিট) রান করা বা চালানো। এই পরিষেবাগুলি ক্লাউড-ভিত্তিক বা স্থানীয় হতে পারে।</p></li>
 <li><p><strong>Analyze (বিশ্লেষণ)</strong>: সংক্ষিপ্তসার পরিসংখ্যান গণনা করা এবং পরীক্ষাগুলির ফলাফলগুলি দৃশ্যায়িত করা।</p></li>
 </ul>
 <p>এখানে সম্পূর্ণ ব্যাপারটির একটি উদাহরণ দেওয়া হলো, যার প্রতিটি ধাপ পরবর্তীতে বিশদভাবে ব্যাখ্যা করা হয়েছেঃ</p>
@@ -376,7 +377,7 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
-Total count for 00 and 11 are: {&#39;11&#39;: 509, &#39;00&#39;: 491}
+Total count for 00 and 11 are: {&#39;00&#39;: 487, &#39;11&#39;: 513}
 </pre></div>
 </div>
 <div class="output text_html"><pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">     ┌───┐     ┌─┐   
@@ -420,7 +421,7 @@ c: 2/═══════════╩══╩═
 </div>
 <p>আরো বিস্তারিত ভাবে, ইম্পোর্ট করা প্যাকেজগুলো হল</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>: এটিকে কোয়ান্টাম সিস্টেমের নির্দেশ হিসাবে বিবেচনা করা যেতে পারে। সমস্ত কোয়ান্টাম অপারেশনগুলো এই প্যাকেজে থাকে।</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>: এটিকে কোয়ান্টাম সিস্টেমের নির্দেশনা হিসাবে বিবেচনা করা যেতে পারে। সমস্ত কোয়ান্টাম অপারেশনগুলো এই প্যাকেজে থাকে।</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">QasmSimulator</span></code>: হচ্ছে এয়ার উচ্চ কর্মদক্ষতাসম্পন্ন বর্তনী (সার্কিট) সিমুলেটর ।</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code>: আয়তলেখ (হিস্টোগ্রাম) তৈরি করে।</p></li>
 </ul>
@@ -431,7 +432,7 @@ c: 2/═══════════╩══╩═
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>এখানে আপনি ২টি কিউবিটের প্রাথমিক মান শূন্য অবস্থায় নিযুক্ত করছেন; সঙ্গে ২টি প্রথাগত (ক্লাসিক্যাল) বিট কে শূন্য দিয়ে নিযুক্ত করছেন; এবং <code class="docutils literal notranslate"><span class="pre">circuit</span></code> টি হল কোয়ান্টাম বর্তনী (সার্কিট)।</p>
+<p>এখানে আপনি ২টি কিউবিটের প্রাথমিক মান শূন্য অবস্থায় নিযুক্ত করছেন; সঙ্গে ২টি ধ্রুপদী (ক্লাসিক্যাল) বিট কে শূন্য দিয়ে নিযুক্ত করছেন; এবং <code class="docutils literal notranslate"><span class="pre">circuit</span></code> টি হল কোয়ান্টাম বর্তনী (সার্কিট)।</p>
 <p>সিনট্যাক্স বা গঠনঃ</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit(int,</span> <span class="pre">int)</span></code></p></li>
@@ -452,7 +453,7 @@ c: 2/═══════════╩══╩═
 <p>উপরের কোডে যে যুক্তিবর্তনীগুলো (গেইট) ব্যবহৃত হয়েছে সেগুলি হলোঃ</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.h(0)</span></code>: ০ কিউবিটে একটি হ্যাডামার্ড যুক্তিবর্তনী (গেইট) <span class="math notranslate nohighlight">\(H\)</span> যোগ করা হয়েছে যার ফলে এতে <strong>উপরিপাতন অবস্থা (সুপারপজিশন)</strong> তৈরি হয়েছে।</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.cx(0,</span> <span class="pre">1)</span></code>: নিয়ন্ত্রক (কনট্রোল) কিউবিট ০ ও লক্ষ্য (টারগেট) কিউবিট ১ এ চালিত কনট্রোলড-নট অপারেশন (<span class="math notranslate nohighlight">\(CNOT\)</span>), কিউবিটগুলোতে একটি <strong>এন্ট্যাঙ্গেলড অবস্থা</strong> তৈরি করে।</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.cx(0,</span> <span class="pre">1)</span></code>: নিয়ন্ত্রক (কন্ট্রোল) কিউবিট ০ ও লক্ষ্য (টারগেট) কিউবিট ১ এ চালিত কন্ট্রোলড-নট অপারেশন (<span class="math notranslate nohighlight">\(CNOT\)</span>), কিউবিটগুলোতে একটি <strong>এন্ট্যাঙ্গেলড অবস্থা</strong> তৈরি করে।</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.measure([0,1],</span> <span class="pre">[0,1])</span></code>: আপনি যদি সমগ্র কোয়ান্টাম এবং ধ্রুপদী (ক্লাসিক্যাল) রেজিস্টার কে <code class="docutils literal notranslate"><span class="pre">measure</span></code> করার জন্য পাঠান, সেক্ষেত্রে i-তম পরিমাপনের ফলাফল i -তম ধ্রুপদী (ক্লাসিক্যাল) বিট এ রাখা হবে।</p></li>
 </ul>
 </section>
@@ -474,17 +475,17 @@ q_1: ─────┤ X ├─╫─┤M├
 c: 2/═══════════╩══╩═
                 0  1 </pre></div></div>
 </div>
-<p>এই সার্কিটটি তে, qubits গুলি নির্দিষ্ট ক্রোম এ সজ্জিত যার মধ্যে qubit zero টি সবচেয়ে উপরে এবং qubit one টি সবচেয়ে নিচে উপস্থিত।  সার্কিটটি বাম থেকে ডানদিকে পড়া হয়, যার অর্থ সার্কিটের আগে যে gates প্রয়োগ করা হয়েছে সেগুলো আর ও বামে অবস্থান করবে।</p>
+<p>এই সার্কিটটি তে, qubit গুলি নির্দিষ্ট ক্রমে সজ্জিত যার মধ্যে qubit ০ সবচেয়ে উপরে এবং qubit ১ সবচেয়ে নিচে উপস্থিত। সার্কিটটি বাম থেকে ডানদিকে পড়া হয়, যার অর্থ সার্কিটের আগে যে যুক্তিবর্তনীগুলি (গেইট) প্রয়োগ করা হয়েছে সেগুলো আর ও বামে অবস্থান করবে।</p>
 <p><code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code> অথবা <code class="docutils literal notranslate"><span class="pre">qiskit.visualization.circuit_drawer()</span></code> এর ডিফল্ট ব্যাকএন্ড হলো টেক্সট ব্যাকএন্ড। তবে আপনার স্থানীয় কর্মপরিবেশের উপর নির্ভর করে আপনি এই ডিফল্টগুলিকে ব্যবহারিক ক্ষেত্রে প্রয়োজনমত পরিবর্তন করতে পারেন। এই কাজটি ইউজার কনফিগ ফাইল ব্যবহার করে করা হয়। ডিফল্ট ইউজা কনফিগ ফাইলটি <code class="docutils literal notranslate"><span class="pre">~/.qiskit/settings.conf``এ</span> <span class="pre">থাকে</span> <span class="pre">এবং</span> <span class="pre">এটি</span> <span class="pre">একটি</span> <span class="pre">``.ini</span></code> ফাইল।</p>
-<p>উদাহরণ স্বরূপ,একটি Matplotlib drawer এর জন্য ব্যবহৃত <code class="docutils literal notranslate"><span class="pre">settings.conf</span></code> ফাইল হলো:</p>
+<p>উদাহরণ স্বরূপ, একটি Matplotlib drawer এর জন্য ব্যবহৃত <code class="docutils literal notranslate"><span class="pre">settings.conf</span></code> ফাইল হলোঃ</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[default]
 circuit_drawer = mpl
 </pre></div>
 </div>
-<p>আপনি যেকোনো বৈধ সার্কিট (বর্তনী) ড্রয়ের ব্যাকএন্ড ব্যবহার করতে পারেন, এর মধ্যে text, mpl, latex, আর latex_source অনভুক্ত রয়েছে.</p>
+<p>আপনি যেকোনো বৈধ সার্কিট (বর্তনী) ড্রয়ার ব্যাকএন্ড ব্যবহার করতে পারেন, এর মধ্যে text, mpl, latex, আর latex_source অন্তর্ভুক্ত রয়েছে।</p>
 </section>
 <section id="step-5-simulate-the-experiment">
-<h3>পদক্ষেপ ৫: পরীক্ষাটি অনুকরণ করুন<a class="headerlink" href="#step-5-simulate-the-experiment" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<h3>পদক্ষেপ ৫ঃ পরীক্ষাটি অনুকরণ (সিমুলেট) করুন<a class="headerlink" href="#step-5-simulate-the-experiment" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <p>Qiskit এয়ার কোয়ান্টাম বর্তনী (সার্কিট) কার্যকর করার একটি উচ্চ কর্মদক্ষতাসম্পন্ন সিমুলেটর ফ্রেমওয়ার্ক। এটি বিভিন্ন ধরনের সিমুলেশনের জন্য <a class="reference external" href="apidoc/providers/aer/aer_backends.html">কিছু ব্যাকএন্ড</a> সরবরাহ করে।</p>
 <p>এয়ার ইন্সটল করতে সমস্যা হলে, <cite>Aer</cite> কে <cite>BasicAer</cite> দিয়ে প্রতিস্থাপন করে বেসিক এয়ার প্রোভাইডার ব্যবহার করতে পারেন। বেসিক এয়ার Qiskit টেরার অন্তর্ভুক্ত।</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>import numpy as np
@@ -507,7 +508,7 @@ from qiskit.providers.basicaer import QasmSimulatorPy
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
-Total count for 00 and 11 are: {&#39;00&#39;: 493, &#39;11&#39;: 507}
+Total count for 00 and 11 are: {&#39;00&#39;: 504, &#39;11&#39;: 496}
 </pre></div>
 </div>
 </div>
@@ -516,8 +517,8 @@ Total count for 00 and 11 are: {&#39;00&#39;: 493, &#39;11&#39;: 507}
 <p><code class="docutils literal notranslate"><span class="pre">result`</span> <span class="pre">অবজেক্টটি</span> <span class="pre">পাওয়ার</span> <span class="pre">পর</span> <span class="pre">ফলাফলের</span> <span class="pre">কাউন্ট</span> <span class="pre">বা</span> <span class="pre">গণনা</span> <span class="pre">সংখ্যা</span> <span class="pre">``get_counts(circuit)</span></code> মেথডের সাহায্যে পাওয়া যাবে। এটি দিয়ে পরীক্ষাটির মোট ফলাফল পাওয়া যায়।</p>
 </section>
 <section id="step-6-visualize-the-results">
-<h3>পদক্ষেপ ৬: ফলাফলটি দৃষ্টিগোচর করুন<a class="headerlink" href="#step-6-visualize-the-results" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>Qiskit প্রদান করে <a href="#id1"><span class="problematic" id="id2">`many visualizations&lt;apidoc/visualization.html&gt;`__</span></a>,</p>
+<h3>পদক্ষেপ ৬ঃ ফলাফল দৃশ্যায়ন<a class="headerlink" href="#step-6-visualize-the-results" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>Qiskit এ <a class="reference external" href="apidoc/visualization.html">নানা ধরনের দৃশ্যায়ন পদ্ধতি</a> রয়েছে,</p>
 <p><code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code> ফাংশনটি এর মধ্যে একটি।</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -532,17 +533,17 @@ Total count for 00 and 11 are: {&#39;00&#39;: 493, &#39;11&#39;: 507}
 <p>পর্যবেক্ষণকৃত <span class="math notranslate nohighlight">\(Pr(00)\)</span> ও <span class="math notranslate nohighlight">\(Pr(11)\)</span> সম্ভাবনাসমূহ এদের সম্পর্কিত কাউন্ট সংখ্যাকে মোট শট শংখ্যা দিয়ে ভাগ করে গণনা করা হয়।</p>
 <div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>কীভাবে সম্ভাবনার ফলাফল পরিবর্তন হয় তা <code class="docutils literal notranslate"><span class="pre">run()</span></code> মেথডের মধ্যে <code class="docutils literal notranslate"><span class="pre">shots</span></code> কিওয়ার্ডটি পরিবর্তন করার চেষ্টা করে দেখুন ।</p>
+<p>কীভাবে সম্ভাবনার ফলাফল পরিবর্তন হয় তা <code class="docutils literal notranslate"><span class="pre">run()</span></code> মেথডের মধ্যে <code class="docutils literal notranslate"><span class="pre">shots</span></code> কীওয়ার্ডটি পরিবর্তন করার চেষ্টা করে দেখুন।</p>
 </div>
 </section>
 </section>
 <section id="next-steps">
 <h2>পরবর্তী ধাপগুলো<a class="headerlink" href="#next-steps" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>আপনি প্রাথমিক ধারণাটুকু পেয়েছেন, এরপর উৎসগুলো থেকে শেখার চেষ্টা করতে পারেনঃ</p>
+<p>আপনি প্রাথমিক ধারণাটুকু পেয়েছেন, এরপর নিচের উৎসগুলো থেকে শেখার চেষ্টা করতে পারেনঃ</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="tutorials.html#tutorials"><span class="std std-ref">Qiskit tutorials</span></a></p></li>
-<li><p><a class="reference external" href="https://qiskit.org/textbook">Textbook: Learn Quantum Computing using Qiskit</a></p></li>
-<li><p><a class="reference external" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">Video series: Coding with Qiskit</a></p></li>
+<li><p><a class="reference external" href="https://qiskit.org/textbook">টেক্সটবুকঃ Qiskit ব্যবহার করে কোয়ান্টাম কম্পিউটিং শেখা</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/playlist?list=PLOFEBzvs-Vvp2xg9-POLJhQwtVktlYGbY">ভিডিও সিরিজঃ Coding with Qiskit</a></p></li>
 </ul>
 </section>
 </section>
@@ -572,7 +573,7 @@ Total count for 00 and 11 are: {&#39;00&#39;: 493, &#39;11&#39;: 507}
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      2021/09/17 সর্বশেষ পরিবর্তন করা হয়েছে।
+      2021/09/18 সর্বশেষ পরিবর্তন করা হয়েছে।
 
     </p>
   </div>
@@ -597,8 +598,8 @@ Total count for 00 and 11 are: {&#39;00&#39;: 493, &#39;11&#39;: 507}
 <li><a class="reference internal" href="#step-2-initialize-variables">দ্বিতীয় ধাপঃ চলরাশির প্রাথমিক মান নিযুক্ত করা</a></li>
 <li><a class="reference internal" href="#step-3-add-gates">তৃতীয় ধাপঃ যুক্তিবর্তনী (গেইট) যুক্ত করা</a></li>
 <li><a class="reference internal" href="#step-4-visualize-the-circuit">চতুর্থ ধাপঃ বর্তনী (সার্কিট) দৃশ্যায়ন</a></li>
-<li><a class="reference internal" href="#step-5-simulate-the-experiment">পদক্ষেপ ৫: পরীক্ষাটি অনুকরণ করুন</a></li>
-<li><a class="reference internal" href="#step-6-visualize-the-results">পদক্ষেপ ৬: ফলাফলটি দৃষ্টিগোচর করুন</a></li>
+<li><a class="reference internal" href="#step-5-simulate-the-experiment">পদক্ষেপ ৫ঃ পরীক্ষাটি অনুকরণ (সিমুলেট) করুন</a></li>
+<li><a class="reference internal" href="#step-6-visualize-the-results">পদক্ষেপ ৬ঃ ফলাফল দৃশ্যায়ন</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#next-steps">পরবর্তী ধাপগুলো</a></li>
