@@ -717,7 +717,7 @@ Average Gate Fidelity: F = 1.000000
 </section>
 <section id="ノイズモデルでカスタムユニタリーを作成する">
 <h2>ノイズモデルでカスタムユニタリーを作成する<a class="headerlink" href="#ノイズモデルでカスタムユニタリーを作成する" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>The Qiskit Aer <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> supports simulation of arbitrary unitary operators directly as specified by the <code class="docutils literal notranslate"><span class="pre">&quot;unitary&quot;</span></code> in the basis gates.</p>
+<p>Qiskit Aerの <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> は、基底ゲート内の <code class="docutils literal notranslate"><span class="pre">&quot;unitary&quot;</span></code> で指定された任意のユニタリー演算子のシミュレーションを直接サポートします。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -777,11 +777,11 @@ True
 [&#39;cx&#39;, &#39;id&#39;, &#39;u3&#39;, &#39;unitary&#39;]
 </pre></div></div>
 </div>
-<p>By default the basis gates of a noise model are <code class="docutils literal notranslate"><span class="pre">['cx','id','u3']</span></code> plus any standard <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> basis gates that are added to the noise model.</p>
+<p>デフォルトでは、ノイズ・モデルの基底ゲートは <code class="docutils literal notranslate"><span class="pre">['cx','id','u3']</span></code> に加えて、ノイズ・モデルに追加される標準の <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> 基底ゲートがあります。</p>
 </section>
 <section id="カスタムユニタリーノイズモデルのシミュレーション">
 <h2>カスタムユニタリーノイズモデルのシミュレーション<a class="headerlink" href="#カスタムユニタリーノイズモデルのシミュレーション" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>Let us first take our previous CX circuit and add an initial Hadamard gate and final measurement to create a Bell-state preparation circuit that we may simulator on the <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> both for the ideal and noisy case:</p>
+<p>以前のCX回路を取り上げて、最初のアダマールゲートと最後の測定を追加して、理想的な場合とノイズがある場合について <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> 上でシミュレートできるベル状態準備回路を作成しましょう。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>

@@ -643,7 +643,7 @@ div.rendered_html tbody tr:hover {
 <td><p>depolarizing 確率が <span class="math notranslate nohighlight">\(p\)</span> の n量子ビット depolarizing エラーチャネル。</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reset_error</span></code></p></td>
-<td><p>a single-qubit reset error parameterized by a probabilities <span class="math notranslate nohighlight">\(p_0, p_1\)</span> of resetting to the <span class="math notranslate nohighlight">\(|0\rangle\)</span>, <span class="math notranslate nohighlight">\(|1\rangle\)</span> state.</p></td>
+<td><p><span class="math notranslate nohighlight">\(|0\rangle\)</span>, <span class="math notranslate nohighlight">\(|1\rangle\)</span> 状態にリセットする確率 <span class="math notranslate nohighlight">\(p_0, p_1\)</span> によりパラメーター化された、単一量子ビットのリセット・エラー</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">thermal_relaxation_error</span></code></p></td>
 <td><p>緩和時間 <span class="math notranslate nohighlight">\(T_1\)</span> , <span class="math notranslate nohighlight">\(T_2\)</span> と ゲート操作時間 <span class="math notranslate nohighlight">\(t\)</span> と 励起状態の熱占有率 <span class="math notranslate nohighlight">\(p_1\)</span> で特徴付けられる1量子ビット熱緩和チャネル</p></td>
@@ -941,7 +941,7 @@ NoiseModel:
 <section id="非ローカル量子ビット量子エラー">
 <h3>非ローカル量子ビット量子エラー<a class="headerlink" href="#非ローカル量子ビット量子エラー" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>これは、特定のゲート量子ビットに作用する命令が発生した後、特定のノイズ量子ビットのセットにエラーが適用されます。</p>
-<p>It is added as <code class="docutils literal notranslate"><span class="pre">noise_model.add_nonlocal_quantum_error(error,</span> <span class="pre">instructions,</span> <span class="pre">instr_qubits,</span> <span class="pre">error_qubits)</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">noise_model.add_nonlocal_quantum_error(error,</span> <span class="pre">instr_qubits,</span> <span class="pre">error_qubits)</span></code> として追加されます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -974,7 +974,7 @@ NoiseModel:
 </section>
 <section id="ノイズモデルでノイズがあるシミュレーションを実行する">
 <h3>ノイズモデルでノイズがあるシミュレーションを実行する<a class="headerlink" href="#ノイズモデルでノイズがあるシミュレーションを実行する" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>The command <code class="docutils literal notranslate"><span class="pre">AerSimulator(noise_model=noise_model)</span></code> returns a simulator configured to the given noise model. In addition to setting the simulator’s noise model, it also overrides the simulator’s basis gates, according to the gates of the noise model.</p>
+<p>コマンド <code class="docutils literal notranslate"><span class="pre">AerSimulator(noise_model=noise_model)</span></code> は、指定されたノイズ・モデルに構成されたシミュレーターを返します。 シミュレーターのノイズ・モデルを設定するだけでなく、ノイズ・モデルのゲートに従って、シミュレーターの基底ゲートもオーバーライドします。</p>
 </section>
 </section>
 <section id="ノイズモデルの例">

@@ -599,7 +599,7 @@ div.rendered_html tbody tr:hover {
 <li><p>各量子ビットの各基底ゲートの <em>gate_error</em> 確率。</p></li>
 <li><p>各量子ビットの各基底ゲートの <em>gate_length</em> 。</p></li>
 <li><p>各量子ビットの <span class="math notranslate nohighlight">\(T_1\)</span> 、 <span class="math notranslate nohighlight">\(T_2\)</span> リラクゼーション時間定数。</p></li>
-<li><p>The readout error probability of each qubit.</p></li>
+<li><p>各量子ビットの読み出しエラーの確率。</p></li>
 </ul>
 <section id="Terra-モックバックエンド">
 <h3>Terra モックバックエンド<a class="headerlink" href="#Terra-モックバックエンド" title="このヘッドラインへのパーマリンク">¶</a></h3>
@@ -617,7 +617,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="デバイスとシミュレーション比較のためのテスト回路">
 <h3>デバイスとシミュレーション比較のためのテスト回路<a class="headerlink" href="#デバイスとシミュレーション比較のためのテスト回路" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>Now we construct a test circuit to compare the output of the real device with the noisy output simulated on the Qiskit Aer <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code>. We will prepare a 3-qubit GHZ state <span class="math notranslate nohighlight">\(\frac{1}{\sqrt2}(|0,0,0\rangle + |1,1,1\rangle)\)</span> on qubits 0, 1 and 2. Before running with noise or on the device we show the ideal expected output with no noise.</p>
+<p>それでは、実機の測定出力と Qiskit Aerの <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> でシミュレートしたノイズがある場合の測定出力を比較する量子回路を作りましょう。量子ビット0,1,2に、3量子ビットのGHZ状態 <span class="math notranslate nohighlight">\(\frac{1}{\sqrt2}(|0,0,0\rangle + |1,1,1\rangle)\)</span> を準備するとします。ノイズがある場合や実機上で実行する前に、ノイズのない理想的な場合の測定出力を示しておきます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -669,10 +669,10 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>ゲートエラーの場合、熱緩和エラーのエラーパラメータは、個々の量子ビット <span class="math notranslate nohighlight">\(T_1\)</span> と <span class="math notranslate nohighlight">\(T_2\)</span> パラメータ、およびデバイスバックエンドプロパティの <code class="docutils literal notranslate"><span class="pre">gate_time</span></code> パラメータとともに、<code class="docutils literal notranslate"><span class="pre">aer.noise.errors</span></code> モジュールの`thermal_relaxation_error`` 関数を使用して生成されます。 次に、脱分極誤差の確率が設定されます。脱分極エラーからの平均ゲート忠実度と、それに続く熱緩和が、バックエンドプロパティからの <code class="docutils literal notranslate"><span class="pre">gate_error</span></code> 値に等しくなります。</p>
 <p>読み出しエラーの場合、量子ビット <code class="docutils literal notranslate"><span class="pre">readout_errors</span></code> によって測定後に記録された古典ビット値が真の結果から反転される確率を返します。</p>
-<section id="Running-a-noise-simulation">
-<h3>Running a noise simulation<a class="headerlink" href="#Running-a-noise-simulation" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>Once we have created a noisy simulator backend based on a real device we can use it to run noisy simulations.</p>
-<p><strong>Important:</strong> When running noisy simulations it is <em>critical</em> to <code class="docutils literal notranslate"><span class="pre">transpile</span></code> the circuit for the backend so that the circuit is transpiled to the correct noisy basis gate set for the backend.</p>
+<section id="ノイズ・シミュレーションの実行">
+<h3>ノイズ・シミュレーションの実行<a class="headerlink" href="#ノイズ・シミュレーションの実行" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>実際のデバイスをベースにしたノイズ・シミュレーターのバックエンドを作成したら、ノイズのあるシミュレーションを実行することができます。</p>
+<p><strong>重要:</strong> ノイズ・シミュレーションを実行する際には、そのバックエンド用に回路を <code class="docutils literal notranslate"><span class="pre">transpile</span></code> することが <em>重要</em> です。これによって回路は、バックエンドに対して正しいノイズ・ベース・ゲート・セットに変換されます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -697,7 +697,7 @@ div.rendered_html tbody tr:hover {
 <img alt="../../_images/tutorials_simulators_2_device_noise_simulation_11_0.png" src="../../_images/tutorials_simulators_2_device_noise_simulation_11_0.png" />
 </div>
 </div>
-<p>If transpilation is skipped noise from the device noise model will not be applied to gates in the circuit that are supported by the simulator, but not supported by the mimicked backend.</p>
+<p>もしトランスパイルがスキップされると、デバイス・ノイズ・モデルからのノイズは回路のゲートに適用されません。これはシミュレーターではサポートされますが、擬似バックエンドではサポートされません。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -778,7 +778,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 </li>
 <li><a class="reference internal" href="#デバイスを模倣するシミュレーターの生成">デバイスを模倣するシミュレーターの生成</a><ul>
-<li><a class="reference internal" href="#Running-a-noise-simulation">Running a noise simulation</a></li>
+<li><a class="reference internal" href="#ノイズ・シミュレーションの実行">ノイズ・シミュレーションの実行</a></li>
 </ul>
 </li>
 </ul>

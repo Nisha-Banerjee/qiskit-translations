@@ -577,7 +577,7 @@ div.rendered_html tbody tr:hover {
 <h1>行列積状態を用いたシミュレーション法<a class="headerlink" href="#行列積状態を用いたシミュレーション法" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <section id="シミュレーション方法">
 <h2>シミュレーション方法<a class="headerlink" href="#シミュレーション方法" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> has several simulation methods including <code class="docutils literal notranslate"><span class="pre">statevector</span></code>, <code class="docutils literal notranslate"><span class="pre">stabilizer</span></code>, <code class="docutils literal notranslate"><span class="pre">extended_stabilizer</span></code> and <code class="docutils literal notranslate"><span class="pre">matrix_product_state</span></code>. Each of these determines the internal representation of the quantum circuit and the algorithms used to process the quantum operations. They each have advantages and disadvantages, and choosing the best method is a matter of investigation. In this tutorial, we focus on the <code class="docutils literal notranslate"><span class="pre">matrix</span> <span class="pre">product</span> <span class="pre">state</span> <span class="pre">simulation</span> <span class="pre">method</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> には、<code class="docutils literal notranslate"><span class="pre">statevector</span></code> 、 <code class="docutils literal notranslate"><span class="pre">stabilizer</span></code> 、 <code class="docutils literal notranslate"><span class="pre">extended_stabilizer</span></code> 、 <code class="docutils literal notranslate"><span class="pre">matrix_product_state</span></code> などのいくつかのシミュレーション・メソッドがあります。 それぞれが量子回路の内部表現と、量子演算を処理するために使用されるアルゴリズムを決定します。 それぞれに長所と短所があり、最良の方法を選ぶには調査が必要です。 このチュートリアルでは、<code class="docutils literal notranslate"><span class="pre">行列積状態を用いたシミュレーション・メソッド</span></code> に焦点を当てます。</p>
 </section>
 <section id="id2">
 <h2>行列積状態を用いたシミュレーション法<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
@@ -591,7 +591,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="行列積状態シミュレーション方法を利用する">
 <h2>行列積状態シミュレーション方法を利用する<a class="headerlink" href="#行列積状態シミュレーション方法を利用する" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>The matrix product state simulation method is invoked in the <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> by setting the simulation method. Other than that, all operations are controlled by the <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> itself, as in the following example:</p>
+<p>行列積状態シミュレーション・メソッドは、シミュレーション・メソッドを設定することによって <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> 内で呼び出されます。 それ以外のすべての操作は、次の例のように、 <code class="docutils literal notranslate"><span class="pre">AerSimulator</span></code> 自体によって制御されます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -629,7 +629,7 @@ div.rendered_html tbody tr:hover {
 {&#39;11&#39;: 515, &#39;00&#39;: 509}
 </pre></div></div>
 </div>
-<p>To see the internal state vector of the circuit we can use the <code class="docutils literal notranslate"><span class="pre">save_statevector</span></code> instruction. To return the full internal MPS structure we can also use the <code class="docutils literal notranslate"><span class="pre">save_matrix_product_state</span></code> instruction.</p>
+<p>回路内部の状態ベクトルを見るには、<code class="docutils literal notranslate"><span class="pre">save_statevector</span></code> 命令を使います。完全な内部のMPS構造を返すには、<code class="docutils literal notranslate"><span class="pre">save_matrix_product_state</span></code> 命令も使用できます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
