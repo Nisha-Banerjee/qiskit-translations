@@ -575,8 +575,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="Qiskit-入門">
 <h1>Qiskit 入門<a class="headerlink" href="#Qiskit-入門" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>Here, we provide an overview of working with Qiskit. The fundamental package of Qiskit is Terra that provides the basic building blocks necessary to program quantum computers. The fundamental unit of Qiskit is the <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_circuit">quantum circuit</a>. A basic workflow using Qiskit consists of two stages: <strong>Build</strong> and <strong>Execute</strong>. <strong>Build</strong> allows you to make different quantum circuits that represent the problem you are solving, and <strong>Execute</strong> that allows you to
-run them on different backends. After the jobs have been run, the data is collected and postprocessed depending on the desired output.</p>
+<p>ここでは、Qiskit での作業概要を説明します。Qiskit の基本パッケージは Terra です。これは、量子コンピューターのプログラミングに必要な、基本構成要素を提供します。Qiskit の基本単位は <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_circuit">量子回路</a> です。Qiskit を使用した基本的なワークフローは、 <strong>構築</strong> と <strong>実行</strong> の2つのステージで構成されます。 <strong>構築</strong> では、あなたが解きたい問題を表現するさまざまな量子回路を構築でき、 <strong>実行</strong> では、その量子回路をさまざまなバックエンドで実行します。ジョブが実行された後、目的とする出力に応じたデータが収集され、後処理されます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -588,11 +587,11 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<section id="Circuit-Basics">
-<h2>Circuit Basics<a class="headerlink" href="#Circuit-Basics" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<section id="Building-the-circuit">
-<h3>Building the circuit<a class="headerlink" href="#Building-the-circuit" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>The basic element needed for your first program is the QuantumCircuit. We begin by creating a <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> comprised of three qubits.</p>
+<section id="回路の基本">
+<h2>回路の基本<a class="headerlink" href="#回路の基本" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<section id="回線の構築">
+<h3>回線の構築<a class="headerlink" href="#回線の構築" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>最初のプログラムに必要な基本要素は、QuantumCircuitです。まず、3つの量子ビットで構成される <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> を作成します。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -603,10 +602,10 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<p>After you create the circuit with its registers, you can add gates (“operations”) to manipulate the registers. As you proceed through the tutorials you will find more gates and circuits; below is an example of a quantum circuit that makes a three-qubit GHZ state</p>
+<p>レジスタで回路を作成した後、レジスタを操作するためのゲート (「演算」) を追加することができます。チュートリアルを進めていくと、さらに多くのゲートと回路が見つかります。以下は3量子ビットのGHZ状態を作る量子回路の例です。</p>
 <div class="math notranslate nohighlight">
 \[|\psi\rangle = \left(|000\rangle+|111\rangle\right)/\sqrt{2}.\]</div>
-<p>To create such a state, we start with a three-qubit quantum register. By default, each qubit in the register is initialized to <span class="math notranslate nohighlight">\(|0\rangle\)</span>. To make the GHZ state, we apply the following gates: - A Hadamard gate <span class="math notranslate nohighlight">\(H\)</span> on qubit 0, which puts it into the superposition state <span class="math notranslate nohighlight">\(\left(|0\rangle+|1\rangle\right)/\sqrt{2}\)</span>. - A controlled-Not operation (<span class="math notranslate nohighlight">\(C_{X}\)</span>) between qubit 0 and qubit 1. - A controlled-Not operation between qubit 0 and qubit 2.</p>
+<p>このような状態を作成するには、3量子ビットの量子レジスターから始めます。デフォルトでは、レジスターの各量子ビットは <span class="math notranslate nohighlight">\(|0\rangle\)</span> に初期化されています。GHZ状態を作成するには、次のゲートを適用します:</p>
 <p>On an ideal quantum computer, the state produced by running this circuit would be the GHZ state above.</p>
 <p>In Qiskit, operations can be added to the circuit one by one, as shown below.</p>
 <div class="nbinput docutils container">
@@ -950,7 +949,7 @@ c: 3/═══════════════════╩══╩══
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最終更新: 2021/09/19
+      最終更新: 2021/09/20
 
     </p>
   </div>
@@ -970,8 +969,8 @@ c: 3/═══════════════════╩══╩══
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Qiskit 入門</a><ul>
-<li><a class="reference internal" href="#Circuit-Basics">Circuit Basics</a><ul>
-<li><a class="reference internal" href="#Building-the-circuit">Building the circuit</a></li>
+<li><a class="reference internal" href="#回路の基本">回路の基本</a><ul>
+<li><a class="reference internal" href="#回線の構築">回線の構築</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Visualize-Circuit">Visualize Circuit</a></li>
