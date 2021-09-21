@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Repetition Codes &mdash; Qiskit 0.30.0 說明文件</title>
+  <title>重複碼 &mdash; Qiskit 0.30.0 說明文件</title>
   
 
   
@@ -291,7 +291,7 @@
       </li>
 
         
-      <li>Repetition Codes</li>
+      <li>重複碼</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -573,8 +573,8 @@ div.rendered_html tbody tr:hover {
 <p class="admonition-title">備註</p>
 <p>此頁面是從 <a href="#id1"><span class="problematic" id="id2">`</span></a>tutorials/noise/6_repelection_code.ipynb <a href="#id3"><span class="problematic" id="id4">`</span></a>__ 產生的。</p>
 </div>
-<section id="Repetition-Codes">
-<h1>Repetition Codes<a class="headerlink" href="#Repetition-Codes" title="本標題的永久連結">¶</a></h1>
+<section id="重複碼">
+<h1>重複碼<a class="headerlink" href="#重複碼" title="本標題的永久連結">¶</a></h1>
 <section id="簡介">
 <h2>簡介<a class="headerlink" href="#簡介" title="本標題的永久連結">¶</a></h2>
 <p>在量子誤差修正中，我們採用了許多雜訊量子位元（我們稱之為 <em>實體量子位元</em> ），並使用它們來儲存數量較少的 <em>邏輯量子位元</em>。 該錯誤修正的程序是為了偵測及抵銷雜訊的效應而設計的。 這使得邏輯量子位元比它們所建立的實體量子位元的雜訊小得多，並且更可靠。(邏輯量子位元是基於實體量子位元而建造。)</p>
@@ -627,8 +627,8 @@ link_qubit_0: |0&gt;┤ X ├┤ X ├
 </div>
 </div>
 </section>
-<section id="Creating-a-repetition-code">
-<h2>Creating a repetition code<a class="headerlink" href="#Creating-a-repetition-code" title="本標題的永久連結">¶</a></h2>
+<section id="建立重複碼">
+<h2>建立重複碼<a class="headerlink" href="#建立重複碼" title="本標題的永久連結">¶</a></h2>
 <p>其 <code class="docutils literal notranslate"><span class="pre">repetition_code</span></code> 類建立一個給定值為 <span class="math notranslate nohighlight">\(d\)</span> 和 :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>T`的程式代碼。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -805,8 +805,8 @@ round_1_link_bit_1: 0 ═══════════════════�
 </pre></div></div>
 </div>
 </section>
-<section id="Building-a-custom-repetition-code">
-<h2>Building a custom repetition code<a class="headerlink" href="#Building-a-custom-repetition-code" title="本標題的永久連結">¶</a></h2>
+<section id="建置自訂重複碼">
+<h2>建置自訂重複碼<a class="headerlink" href="#建置自訂重複碼" title="本標題的永久連結">¶</a></h2>
 <p>您也可以自行執行測量和邏輯 <code class="docutils literal notranslate"><span class="pre">X</span></code> 閘。 例如，讓我們設立一個沒有症狀測量的程式碼。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -1064,8 +1064,8 @@ round_0_link_bit_1: 0 ═══════════════════�
 </pre></div></div>
 </div>
 </section>
-<section id="Running-a-repetition-code">
-<h2>Running a repetition code<a class="headerlink" href="#Running-a-repetition-code" title="本標題的永久連結">¶</a></h2>
+<section id="執行一個重複碼">
+<h2>執行一個重複碼<a class="headerlink" href="#執行一個重複碼" title="本標題的永久連結">¶</a></h2>
 <p>程式碼物件會產生程式碼所必需的電路。 然後，使用者可以使用他們偏好的任何方法來執行它們，從而對編譯的過程、後台、雜訊模型等有完整的控制。</p>
 <p>例如，在這裡我們用 <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> 來執行沒有雜訊的程式碼。</p>
 <div class="nbinput docutils container">
@@ -1123,7 +1123,7 @@ round_0_link_bit_1: 0 ═══════════════════�
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">0</span></code> to the far left for the logical <code class="docutils literal notranslate"><span class="pre">0</span></code> result, and the <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">1</span></code> to the far left of the logical <code class="docutils literal notranslate"><span class="pre">1</span></code>, are the logical readout. Any code qubit could be used for this readout, since they should (without errors) all be equal. So we could have just one result here, for one arbitrarily chosen code qubit. Or we could have <span class="math notranslate nohighlight">\(d\)</span>, one for each qubit. Instead we have two, from the two qubits at either end of the line. This is because it works best with the decoder (which we’ll use
 later). In the absence of errors, these two values will always be equal.</p></li>
-<li><p>The following <code class="docutils literal notranslate"><span class="pre">0000</span></code> is the <span class="math notranslate nohighlight">\(d-1\)</span> results of the syndrome measurements for the first round.A <code class="docutils literal notranslate"><span class="pre">0</span></code> implies that the corresponding pair of qubits where the same, and <code class="docutils literal notranslate"><span class="pre">1</span></code> implies different. There are <span class="math notranslate nohighlight">\(d-1\)</span> results because the line of <span class="math notranslate nohighlight">\(d\)</span> code qubits has <span class="math notranslate nohighlight">\(d-1\)</span> possible neighboring pairs. In the absence of errors, they will all be <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p>下列 <code class="docutils literal notranslate"><span class="pre">0000</span></code> 是 <span class="math notranslate nohighlight">\(d-1\)</span> 第一輪症狀測量 (syndrome measurements) 的結果。 <code class="docutils literal notranslate"><span class="pre">0</span></code> 表示對應的量子位元對是相同的，而 <code class="docutils literal notranslate"><span class="pre">1</span></code> 表示不同。 我們總共有 <span class="math notranslate nohighlight">\(d-1\)</span> 個結果因為此擁有 <span class="math notranslate nohighlight">\(d\)</span> 個程式碼量子位元的線會擁有 <span class="math notranslate nohighlight">\(d-1\)</span> 個可能的相鄰對。在沒有誤差的情況下，它們都會是 <code class="docutils literal notranslate"><span class="pre">0</span></code>。</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">0000</span></code> that follows that is the syndrome change between the first and second rounds. It is therefore the bitwise <code class="docutils literal notranslate"><span class="pre">OR</span></code> of the syndrome measurement results from the second round with those from the first. In the absence of errors, they will all be <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
 <li><p>Subsequent blocks follow the same formula, though the last requires some comment. This is not measured using the standard method (with a link qubit). Instead it is calculated from the final readout measurement of all code qubits. Again it is presented as a syndrome change, and will be all <code class="docutils literal notranslate"><span class="pre">0</span></code> in the absence of errors. This is the <span class="math notranslate nohighlight">\(T+1\)</span>-th block of syndrome measurements since, as it is not done in the same way as the others, it is not counted among the <span class="math notranslate nohighlight">\(T\)</span> syndrome measurement
 rounds.</p></li>
@@ -1481,7 +1481,7 @@ logical error probability for postselection = 0.0
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/09/20。
+      最後更新於 2021/09/21。
 
     </p>
   </div>
@@ -1500,11 +1500,11 @@ logical error probability for postselection = 0.0
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Repetition Codes</a><ul>
+<li><a class="reference internal" href="#">重複碼</a><ul>
 <li><a class="reference internal" href="#簡介">簡介</a></li>
-<li><a class="reference internal" href="#Creating-a-repetition-code">Creating a repetition code</a></li>
-<li><a class="reference internal" href="#Building-a-custom-repetition-code">Building a custom repetition code</a></li>
-<li><a class="reference internal" href="#Running-a-repetition-code">Running a repetition code</a></li>
+<li><a class="reference internal" href="#建立重複碼">建立重複碼</a></li>
+<li><a class="reference internal" href="#建置自訂重複碼">建置自訂重複碼</a></li>
+<li><a class="reference internal" href="#執行一個重複碼">執行一個重複碼</a></li>
 <li><a class="reference internal" href="#解碼重複碼">解碼重複碼</a></li>
 </ul>
 </li>

@@ -581,7 +581,7 @@ div.rendered_html tbody tr:hover {
 <ol class="arabic simple">
 <li><p><strong>量子態斷層掃描</strong>：給定一個狀態準備電路，此電路把一個系統準備在一個量子態，重建對在系統中獲得的對應實際狀態的密度矩陣 <span class="math notranslate nohighlight">\(\rho\)</span> 之描述。</p></li>
 <li><p><strong>量子過程斷層掃描(Quantum process tomography)</strong>: 給定一個電路，重新建構對該量子通道 <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> 的描述，此描述形容該電路的運算子作用在該系統時的情形。</p></li>
-<li><p><strong>Quantum gate set tomography</strong>: Performs process tomography on a set of gates in a self-consistent manner, meaning quantum noises on gates used by the tomography process itself is also taken into account.</p></li>
+<li><p><strong>量子閘集斷層掃描(Quantum gate set tomography)</strong>：以自洽的方式對一組閘進行過程斷層掃描 (process tomography) ，這意味著斷層掃描過程本身所使用的閘的量子雜訊也會被考慮進去。</p></li>
 </ol>
 <p>這個筆記本提供範例說明如何使用 <code class="docutils literal notranslate"><span class="pre">ignis.verification.tomography</span></code> 模組。</p>
 <div class="nbinput nblast docutils container">
@@ -685,7 +685,7 @@ q1_5: ─────┤ X ├
            └───┘
 </pre></div></div>
 </div>
-<p>Here we are going to generate and run the state tomography circuits. By only passing in the 2 registers we want to measure the state tomography will only run on that reduced <span class="math notranslate nohighlight">\(2^2\)</span> Hilbert space. However, if we pass the whole register in the state tomography module will try and fit the full <span class="math notranslate nohighlight">\(2^6\)</span> space.</p>
+<p>在這裡，我們將生成並運行一個狀態斷層掃描電路。 如果我們只把我們想要測量的兩個暫存器傳遞進去，該狀態斷層掃描只會在縮減的 <span class="math notranslate nohighlight">\(2^2\)</span> Hilbert 空間上執行。然而，如果我們把全部的暫存器傳遞進去，則該狀態斷層掃描模組會試著擬合其完整的 <span class="math notranslate nohighlight">\(2^6\)</span> Hilbert 空間。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -737,8 +737,8 @@ State Fidelity: F = 0.99796
 </pre></div></div>
 </div>
 </section>
-<section id="Repeat-the-Example-with-Measurement-Noise">
-<h3>Repeat the Example with Measurement Noise<a class="headerlink" href="#Repeat-the-Example-with-Measurement-Noise" title="本標題的永久連結">¶</a></h3>
+<section id="重複測量雜訊的範例">
+<h3>重複測量雜訊的範例<a class="headerlink" href="#重複測量雜訊的範例" title="本標題的永久連結">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -1043,8 +1043,8 @@ State fidelity: F = 0.99430
 </section>
 <section id="2-量子位元條件式斷層掃描">
 <h2>2 量子位元條件式斷層掃描<a class="headerlink" href="#2-量子位元條件式斷層掃描" title="本標題的永久連結">¶</a></h2>
-<p>In this example, we have a three-qubit system where one of the qubits will be an ancilla for performing state tomography, i.e. only perform tomography when the third qubit is in the state “1”. The circuit is setup in such a way that after conditional tomography we will get a Bell state on the first two qubits.</p>
-<p>First make a 3Q GHZ state with no classical measurements.</p>
+<p>在這個例子中，我們有一個 3 量子位元系統，其中一個量子位元會是一個用來執行狀態斷層掃描的輔助量子位元，也就是說僅當第三個量子位元處於狀態 “1” 時才執行斷層掃描。 該電路的設置使得前 2 個量子位元在條件斷層掃描後處於 Bell 態。</p>
+<p>在沒有古典測量的情況下，先做一個三量子位元 GHZ 狀態。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -1223,8 +1223,8 @@ array([[ 0.502+0.j   ,  0.   +0.001j,  0.004+0.001j, -0.498-0.006j],
 </pre></div>
 </div>
 </div>
-<section id="Noiseless-1-qubit-gate-set-tomography">
-<h3>Noiseless 1-qubit gate set tomography<a class="headerlink" href="#Noiseless-1-qubit-gate-set-tomography" title="本標題的永久連結">¶</a></h3>
+<section id="無雜訊的-1-量子位元閘集斷層掃描">
+<h3>無雜訊的 1 量子位元閘集斷層掃描<a class="headerlink" href="#無雜訊的-1-量子位元閘集斷層掃描" title="本標題的永久連結">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
@@ -1302,7 +1302,7 @@ Average gate fidelity: F = 1.00084
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/09/20。
+      最後更新於 2021/09/21。
 
     </p>
   </div>
@@ -1325,7 +1325,7 @@ Average gate fidelity: F = 1.00084
 <li><a class="reference internal" href="#簡介">簡介</a></li>
 <li><a class="reference internal" href="#初始範例">初始範例</a><ul>
 <li><a class="reference internal" href="#二量子位元狀態斷層掃描範例">二量子位元狀態斷層掃描範例</a></li>
-<li><a class="reference internal" href="#Repeat-the-Example-with-Measurement-Noise">Repeat the Example with Measurement Noise</a></li>
+<li><a class="reference internal" href="#重複測量雜訊的範例">重複測量雜訊的範例</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#單量子位元過程斷層掃描範例">單量子位元過程斷層掃描範例</a></li>
@@ -1338,7 +1338,7 @@ Average gate fidelity: F = 1.00084
 </li>
 <li><a class="reference internal" href="#閘集斷層掃描">閘集斷層掃描</a><ul>
 <li><a class="reference internal" href="#1-量子位元閘集斷層掃描範例">1 量子位元閘集斷層掃描範例</a><ul>
-<li><a class="reference internal" href="#Noiseless-1-qubit-gate-set-tomography">Noiseless 1-qubit gate set tomography</a></li>
+<li><a class="reference internal" href="#無雜訊的-1-量子位元閘集斷層掃描">無雜訊的 1 量子位元閘集斷層掃描</a></li>
 </ul>
 </li>
 </ul>
