@@ -504,16 +504,10 @@ feature were deprecated in the 0.9.0 release of Terra, which was released on
 August 22, 2019, then that feature should still appear in all releases until at
 least November 22, 2019. Since releases do not occur at fixed time intervals,
 a deprecation warning may only occur in one release prior to removal.</p>
-<p>Note that this delay is a minimum. For significant features, it is recommended
-that the deprecated feature appears for at least double that time. Also, per
-the stable branch policy, deprecation removals can only occur during minor
-version releases; they are not appropriate for backporting.</p>
+<p>Ten en cuenta que este retraso es mínimo. Para características importantes, se recomienda que la característica obsoleta aparezca al menos el doble de ese tiempo. Además, según la política de rama (branch) estable, las eliminaciones de obsolescencia solo pueden ocurrir durante las versiones menores; no son apropiados para backporting (adaptación a versiones anteriores).</p>
 <section id="deprecation-warnings">
 <h4>Advertencias de Obsolescencia<a class="headerlink" href="#deprecation-warnings" title="Enlazar permanentemente con este título">¶</a></h4>
-<p>The proper way to raise a deprecation warning is to use the <code class="docutils literal notranslate"><span class="pre">warn</span></code> function
-from the <a class="reference external" href="https://docs.python.org/3/library/warnings.html">warnings module</a>
-in the Python standard library. The warning category class
-should be a <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code>. An example would be:</p>
+<p>La forma correcta de generar una advertencia de obsolescencia es usar la función <code class="docutils literal notranslate"><span class="pre">warn</span></code> del <a class="reference external" href="https://docs.python.org/3/library/warnings.html">módulo de advertencias</a> en la biblioteca estándar de Python. La clase de categoría de advertencia debe ser una <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code>. Un ejemplo sería:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
@@ -523,80 +517,41 @@ should be a <code class="docutils literal notranslate"><span class="pre">Depreca
                   <span class="s1">&#39;instead.&#39;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>One thing to note here is the <code class="docutils literal notranslate"><span class="pre">stack_level</span></code> kwarg on the warn() call. This
-argument is used to specify which level in the call stack will be used as
-the line initiating the warning. Typically, <code class="docutils literal notranslate"><span class="pre">stack_level</span></code> should be set to 2,
-as this will show the line calling the context where the warning was raised.
-In the above example, it would be the caller of <code class="docutils literal notranslate"><span class="pre">foo()</span></code>. If you did not set this,
-the warning would show that it was caused by the line in the foo()
-function, which is not helpful for users trying to determine the origin
-of a deprecated call. However, this value may be adjusted, depending on the call
-stack and where <code class="docutils literal notranslate"><span class="pre">warn()</span></code> gets called from. For example, if the warning is always
-raised by a private method that only has one caller, <code class="docutils literal notranslate"><span class="pre">stack_level=3</span></code> might be
-appropriate.</p>
+<p>Una cosa a tener en cuenta aquí es el kwarg <code class="docutils literal notranslate"><span class="pre">stack_level`</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">llamada</span> <span class="pre">a</span> <span class="pre">warn().</span> <span class="pre">Este</span> <span class="pre">argumento</span> <span class="pre">se</span> <span class="pre">utiliza</span> <span class="pre">para</span> <span class="pre">especificar</span> <span class="pre">qué</span> <span class="pre">nivel</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">pila</span> <span class="pre">de</span> <span class="pre">llamadas</span> <span class="pre">se</span> <span class="pre">utilizará</span> <span class="pre">como</span> <span class="pre">línea</span> <span class="pre">que</span> <span class="pre">inicia</span> <span class="pre">la</span> <span class="pre">advertencia.</span> <span class="pre">Por</span> <span class="pre">lo</span> <span class="pre">general,</span> <span class="pre">``stack_level</span></code> debe establecerse en 2, ya que esto mostrará la línea que llama al contexto donde se generó la advertencia. En el ejemplo anterior, sería el llamador de <code class="docutils literal notranslate"><span class="pre">foo()</span></code>. Si no configuraste esto, la advertencia mostraría que fue causada por la línea en la función foo(), lo cual no es útil para los usuarios que intentan determinar el origen de una llamada obsoleta. Sin embargo, este valor puede ajustarse, dependiendo de la pila de llamadas y de dónde se llama a <code class="docutils literal notranslate"><span class="pre">warn()</span></code>. Por ejemplo, si la advertencia siempre se genera mediante un método privado que solo se llama desde un solo lugar, <code class="docutils literal notranslate"><span class="pre">stack_level=3</span></code> podría ser apropiado.</p>
 </section>
 </section>
 <section id="stable-branch-policy">
 <h3>Política de Ramificación Estable<a class="headerlink" href="#stable-branch-policy" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>The stable branch is intended to be a safe source of fixes for high-impact
-bugs and security issues that have been fixed on master since a
-release. When reviewing a stable branch PR, we must balance the risk
-of any given patch with the value that it will provide to users of the
-stable branch. Only a limited class of changes are appropriate for
-inclusion on the stable branch. A large, risky patch for a major issue
-might make sense, as might a trivial fix for a fairly obscure error-handling
-case. A number of factors must be weighed when considering a
-change:</p>
+<p>La rama estable está destinada a ser una fuente segura de correcciones para errores de alto impacto y problemas de seguridad que se han solucionado en master desde su lanzamiento. Al revisar un PR de rama estable, debemos equilibrar el riesgo de cualquier parche dado con el valor que proporcionará a los usuarios de la rama estable. Solo una clase limitada de cambios es apropiada para su inclusión en la rama estable. Un parche grande y arriesgado para un problema importante podría tener sentido, al igual que una solución trivial para un caso de manejo de errores bastante oscuro. Se deben tomar en cuenta varios factores al considerar un cambio:</p>
 <ul class="simple">
-<li><p>The risk of regression: even the tiniest changes carry some risk of
-breaking something, and we really want to avoid regressions on the
-stable branch.</p></li>
+<li><p>El riesgo de regresión: incluso los cambios más pequeños conllevan algún riesgo de romper algo, y realmente queremos evitar regresiones en la rama estable.</p></li>
 <li><p>El beneficio de visibilidad para el usuario: ¿estamos arreglando algo que los usuarios podrían notar? y, de ser así, ¿qué tan importante es?</p></li>
-<li><p>How self-contained the fix is: if it fixes a significant issue but
-also refactors a lot of code, it’s probably worth thinking about
-what a less risky fix might look like.</p></li>
-<li><p>Whether the fix is already on master: a change must be a backport of
-a change already merged onto master, unless the change simply does
-not make sense on master.</p></li>
+<li><p>Qué tan autónoma es la solución: si soluciona un problema importante, pero también refactoriza una gran cantidad de código, probablemente valga la pena pensar en cómo se vería una solución menos riesgosa.</p></li>
+<li><p>Si la corrección ya está en master: un cambio debe ser un backport de un cambio ya fusionado en master, a menos que el cambio simplemente no tenga sentido en master.</p></li>
 </ul>
 <section id="backporting-procedure">
-<h4>Backporting procedure:<a class="headerlink" href="#backporting-procedure" title="Enlazar permanentemente con este título">¶</a></h4>
-<p>When backporting a patch from master to stable, we want to keep a
-reference to the change on master. When you create the branch for the
-stable PR, use:</p>
+<h4>Procedimiento de adaptación a versiones anteriores (backporting):<a class="headerlink" href="#backporting-procedure" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Al adaptar un parche de la rama master a una rama estable, queremos mantener una referencia del cambio en master. Cuando crees la rama para el PR estable, usa:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git cherry-pick -x $master_commit_id
 </pre></div>
 </div>
-<p>However, this only works for small self-contained patches from master.
-If you need to backport a subset of a larger commit (from a squashed PR,
-for example) from master, do this manually. In these cases, add:</p>
+<p>Sin embargo, esto solo funciona para pequeños parches autónomos de master. Si necesitas exportar un subconjunto de un commit más grande (de un PR compactado, por ejemplo) de master, hazlo manualmente. En estos casos, agrega:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Backported</span> <span class="n">from</span><span class="p">:</span> <span class="c1">#master pr number</span>
 </pre></div>
 </div>
-<p>so that we can track the source of the change subset, even if
-a strict cherry-pick doesn't make sense.</p>
-<p>If the patch you’re proposing will not cherry-pick cleanly, you can help
-by resolving the conflicts yourself and proposing the resulting patch.
-Please keep Conflicts lines in the commit message to help review of the
-stable patch.</p>
+<p>para que podamos rastrear la fuente del subconjunto de cambios, incluso si una selección puntual (cherry-pick) no tiene sentido.</p>
+<p>Si el parche que estás proponiendo no se puede seleccionar puntualmente (cherry-pick) de manera limpia, puedes ayudar resolviendo los conflictos tu mismo y proponiendo el parche resultante. Mantén las líneas de Conflictos en el mensaje de confirmación (commit) para ayudar a revisar el parche estable.</p>
 </section>
 <section id="backport-labels">
 <h4>Etiquetas de backport<a class="headerlink" href="#backport-labels" title="Enlazar permanentemente con este título">¶</a></h4>
-<p>Bugs or PRs tagged with <code class="docutils literal notranslate"><span class="pre">stable</span> <span class="pre">backport</span> <span class="pre">potential</span></code> are bugs
-that apply to the stable release too and may be suitable for
-backporting once a fix lands in master. Once the backport has been
-proposed, the tag should be removed.</p>
-<p>Include <code class="docutils literal notranslate"><span class="pre">[Stable]</span></code> in the title of the PR against the stable branch,
-as a sign that setting the target branch as stable was not
-a mistake. Also, reference to the PR number in master that you are
-porting.</p>
+<p>Los errores o PRs etiquetados con <a href="#id1"><span class="problematic" id="id2">``</span></a>stable backport potential` son errores que también se aplican a la versión estable y pueden ser adecuados para el backporting una vez que una corrección llega a master. Una vez que se ha propuesto el backport, se debe quitar la etiqueta.</p>
+<p>Incluye <code class="docutils literal notranslate"><span class="pre">[Stable]</span></code> en el título del PR hacia la rama estable, como una señal de que establecer la rama objetivo como estable no fue un error. Además, haz referencia al número del PR en master del que se está transfiriendo.</p>
 </section>
 </section>
 </section>
 <section id="contributing-to-documentation">
 <h2>Contribuir a la Documentación<a class="headerlink" href="#contributing-to-documentation" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Qiskit documentation is shaped by the <a class="reference external" href="https://www.writethedocs.org/guide/docs-as-code/">docs as code</a> philosophy, primarily
-drawn from Qiskit code comments in the <a class="reference external" href="https://alistapart.com/article/the-ten-essentials-for-good-api-documentation/">style of API documentation</a>.</p>
+<p>La documentación de Qiskit está conformada por la filosofía <a class="reference external" href="https://www.writethedocs.org/guide/docs-as-code/">documentación como código</a>, extraída principalmente de los comentarios del código de Qiskit que está en el <a class="reference external" href="https://alistapart.com/article/the-ten-essentials-for-good-api-documentation/">estilo de documentación para APIs</a>.</p>
 <p>La documentación se construye desde la rama master de <a class="reference external" href="https://github.com/Qiskit/qiskit/tree/master/docs">Qiskit/qiskit/docs</a> usando <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a>. La mayoría de la documentación, bajo <a class="reference external" href="https://qiskit.org/documentation/apidoc/qiskit.html">Referencias de la API</a>, se toma de los comentarios del código en los repositorios indicados en <a class="reference internal" href="#where-things-are"><span class="std std-ref">Dónde está el código</span></a>.</p>
 <section id="documentation-structure">
 <h3>Estructura de la Documentación<a class="headerlink" href="#documentation-structure" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -805,13 +760,13 @@ conda activate QiskitDevenv
 <span id="install-qiskit-terra"></span><h3>Instalar Terra a partir del Código Fuente<a class="headerlink" href="#installing-terra-from-source" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Para instalar a partir del código fuente es necesario que tengas un compilador de C++ en tu computadora que soporte C++11.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="4f9c3a2f-c50b-4555-9352-912f1cfe743f" name="24e386ee-7354-4ff3-ba8b-2a7aa902e663" type="radio">
-</input><label class="tabbed-label" for="4f9c3a2f-c50b-4555-9352-912f1cfe743f">
+<input checked="checked" id="0f26828c-3d6c-4651-ad94-955408440004" name="a9dcb612-4138-4fa5-a611-8cce178288fc" type="radio">
+</input><label class="tabbed-label" for="0f26828c-3d6c-4651-ad94-955408440004">
 Compilador para Linux</label><div class="tabbed-content docutils">
 <p>En la mayoría de las plataformas Linux, el compilador necesario GCC está ya instalado.</p>
 </div>
-<input id="1048f8df-e863-4683-9573-46c4698cc78a" name="24e386ee-7354-4ff3-ba8b-2a7aa902e663" type="radio">
-</input><label class="tabbed-label" for="1048f8df-e863-4683-9573-46c4698cc78a">
+<input id="aff5be4a-cb5e-4b4d-8605-62c1ccfc9545" name="a9dcb612-4138-4fa5-a611-8cce178288fc" type="radio">
+</input><label class="tabbed-label" for="aff5be4a-cb5e-4b4d-8605-62c1ccfc9545">
 Compilador para macOS</label><div class="tabbed-content docutils">
 <p>Si utilizas macOS, puedes instalar el compilador Clang al instalar XCode. Comprueba si tienes XCode y Clang instalados abriendo una ventana de terminal y ejecutando los siguientes comandos.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>clang --version
@@ -822,8 +777,8 @@ Compilador para macOS</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="abe53979-d052-4436-8663-9ac27950cc86" name="24e386ee-7354-4ff3-ba8b-2a7aa902e663" type="radio">
-</input><label class="tabbed-label" for="abe53979-d052-4436-8663-9ac27950cc86">
+<input id="27c5dda7-3a79-4cd2-825b-04a27a8c6550" name="a9dcb612-4138-4fa5-a611-8cce178288fc" type="radio">
+</input><label class="tabbed-label" for="27c5dda7-3a79-4cd2-825b-04a27a8c6550">
 Compilador para Windows</label><div class="tabbed-content docutils">
 <p>En Windows, lo más fácil de instalar es el compilador Visual C++ desde <a class="reference external" href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2017">Build Tools for Visual Studio 2017</a>. Por otro lado puedes instalar Visual Studio versión 2015 o 2017, asegurándote de seleccionar las opciones para instalar el compilador C++.</p>
 </div>
@@ -891,8 +846,8 @@ Compilador para Windows</label><div class="tabbed-content docutils">
 </ol>
 <p>Después de esto, los pasos para instalar Aer dependerán del sistema operativo que estés usando. Dado que Aer es un programa compilado en C++ con una interfaz de Python, hay dependencias necesarias para construir Aer que no son de Python y que no se pueden instalar de manera universal en todos los sistemas operativos.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="19c41314-0e5f-44e5-b22a-fa387b7cac23" name="76db8770-494c-4382-888c-c12a79d3d6a2" type="radio">
-</input><label class="tabbed-label" for="19c41314-0e5f-44e5-b22a-fa387b7cac23">
+<input checked="checked" id="22bad111-6e59-4aa6-a533-69a7ffdc56c2" name="7ba49240-3ab0-4912-b8e0-7d93c14cc4be" type="radio">
+</input><label class="tabbed-label" for="22bad111-6e59-4aa6-a533-69a7ffdc56c2">
 Linux</label><div class="tabbed-content docutils">
 <ol class="arabic" start="3">
 <li><p>Instalar requerimientos del compilador.</p>
@@ -918,8 +873,8 @@ Linux</label><div class="tabbed-content docutils">
 </li>
 </ol>
 </div>
-<input id="2f213ebd-d7f3-41df-96d8-1f53440efc89" name="76db8770-494c-4382-888c-c12a79d3d6a2" type="radio">
-</input><label class="tabbed-label" for="2f213ebd-d7f3-41df-96d8-1f53440efc89">
+<input id="8f71d037-ba93-41ab-8d5d-449332d060e2" name="7ba49240-3ab0-4912-b8e0-7d93c14cc4be" type="radio">
+</input><label class="tabbed-label" for="8f71d037-ba93-41ab-8d5d-449332d060e2">
 macOS</label><div class="tabbed-content docutils">
 <ol class="arabic" start="3">
 <li><p>Instalar dependencias.</p>
@@ -939,8 +894,8 @@ macOS</label><div class="tabbed-content docutils">
 </li>
 </ol>
 </div>
-<input id="65423b60-8042-47f9-84aa-1afe615435b0" name="76db8770-494c-4382-888c-c12a79d3d6a2" type="radio">
-</input><label class="tabbed-label" for="65423b60-8042-47f9-84aa-1afe615435b0">
+<input id="680d471e-fff4-4512-9fe7-bf81145970bb" name="7ba49240-3ab0-4912-b8e0-7d93c14cc4be" type="radio">
+</input><label class="tabbed-label" for="680d471e-fff4-4512-9fe7-bf81145970bb">
 Windows</label><div class="tabbed-content docutils">
 <p>En Windows debes usar <a class="reference external" href="https://www.anaconda.com/distribution/#windows">Anaconda3</a> o <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda3</a> para instalar todas las dependencias.</p>
 <ol class="arabic" start="3">
@@ -1312,7 +1267,7 @@ multiple elements more transparent.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#stable-branch-policy">Política de Ramificación Estable</a><ul>
-<li><a class="reference internal" href="#backporting-procedure">Backporting procedure:</a></li>
+<li><a class="reference internal" href="#backporting-procedure">Procedimiento de adaptación a versiones anteriores (backporting):</a></li>
 <li><a class="reference internal" href="#backport-labels">Etiquetas de backport</a></li>
 </ul>
 </li>
